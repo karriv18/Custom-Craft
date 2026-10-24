@@ -1,0 +1,48 @@
+.bundle-banner {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  background-color: rgb(243, 235, 235);
+  width: 100vw;
+}
+
+.bundle-banner-summary {
+  width: inherit;
+  display: flex;
+  justify-content: space-around;
+  flex-direction: row;
+}
+
+.bundle-banner-summary p span {
+  background-color: antiquewhite;
+}
+
+.bundle-banner-progress {
+  width: inherit;
+  display: flex;
+  height: 100%;
+  flex-direction: column;
+  align-items: center;
+}
+
+.bundle-banner-tiers {
+  width: inherit;
+  display: flex;
+  justify-content: space-around;
+}
+
+.bundle-tier {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  flex-direction: row;
+  height: 100%;
+}
+
+.bundle-tier-radio {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  height: 100%;
+}

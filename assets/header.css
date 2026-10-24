@@ -1,0 +1,15 @@
+.header-navbar {
+  width: inherit;
+  height: 10vh;
+  background-color: white;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-around;
+  border-color: rgb(251 249 246 / 0.9);
+  box-shadow: rgba(0,0, 0, 0.10);
+  /* TODO make position fixed */
+  /* position: fixed;
+  left: 0;
+  right: 0; */
+}

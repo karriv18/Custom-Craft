@@ -1,0 +1,27 @@
+{{ 'header.css' | asset_url | stylesheet_tag }}
+
+<nav class="header-navbar">
+  <div class="navbar-section1">
+    <h3>Curated Atelier</h3>
+    <p>Apothecary & Rituals</p>
+  </div>
+  <div>
+    <button>Bespoke Bundler</button>
+    <button>Fomulations</button>
+    <button>Discovery Sets</button>
+    <button>Philosophy</button>
+    <button>Account</button>
+  </div>
+  <div>
+    <button>Box Atelier 2 /3</button>
+    <button>Account</button>
+  </div>
+</nav>
+
+{% schema %}
+{
+  "name": "Navbar",
+  "settings": [],
+  "presets": []
+}
+{% endschema %}

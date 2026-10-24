@@ -1,0 +1,56 @@
+{{ 'bundle-banner.css' | asset_url | stylesheet_tag }}
+
+<nav class="bundle-banner">
+  <div class="bundle-banner-summary">
+    <p>2/3</p>
+    <p>SAVED $15.20</p>
+    <p>
+      <span>Add 1 more formula to unlock 20% OFF Coffret • Code BUNDLE20</span>
+    </p>
+  </div>
+
+  <div class="bundle-banner-progress">
+    <p>Tier 2 Active: 10% Bundle Privileges Applied</p>
+    <progress id="file" max="100" value="70">70%</progress>
+  </div>
+
+  <div class="bundle-banner-tiers">
+    <div class="bundle-tier">
+      <div class="bundle-tier-radio">
+        <input type="radio" />
+      </div>
+      <div>
+        <p>Tier 01 • 1 Formulation</p>
+        <p>Standard Retail</p>
+      </div>
+    </div>
+
+    <div class="bundle-tier">
+      <div class="bundle-tier-radio">
+        <input type="radio" />
+      </div>
+      <div>
+        <p>Tier 01 • 1 Formulation</p>
+        <p>Standard Retail</p>
+      </div>
+    </div>
+
+    <div class="bundle-tier">
+      <div class="bundle-tier-radio">
+        <input type="radio" />
+      </div>
+      <div>
+        <p>Tier 01 • 1 Formulation</p>
+        <p>Standard Retail</p>
+      </div>
+    </div>
+  </div>
+</nav>
+
+{% schema %}
+{
+  "name": "Bundle Banner",
+  "settings": [],
+  "presets": []
+}
+{% endschema %}

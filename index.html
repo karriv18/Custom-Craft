@@ -1,0 +1,823 @@
+<!DOCTYPE html>
+<html class="scroll-smooth" lang="en">
+
+<head>
+  <meta charset="utf-8" />
+  <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+  <meta content="web_standard" name="shell-type" />
+  <title>Curated Atelier — Smart Box Bundler</title>
+  <link href="https://fonts.googleapis.com" rel="preconnect" />
+  <link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect" />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;1,400&amp;family=Plus+Jakarta+Sans:wght@400;500;600;700&amp;display=swap"
+    rel="stylesheet" />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200"
+    rel="stylesheet" />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap"
+    rel="stylesheet" />
+  <style>
+    @layer base {
+
+      html,
+      body {
+        margin: 0;
+        padding: 0;
+      }
+
+      body {
+        overscroll-behavior: none;
+      }
+
+      main>:first-child {
+        margin-top: 0 !important;
+      }
+
+      main>:last-child {
+        margin-bottom: 0 !important;
+      }
+    }
+
+    ::-webkit-scrollbar {
+      display: none;
+    }
+  </style>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script
+    id="tailwind-config">tailwind.config = { darkMode: "class", theme: { extend: { "colors": { "surface-tint": "#615e5b", "background": "#fbf9f6", "on-tertiary-fixed-variant": "#62400b", "primary-container": "#1d1b19", "on-tertiary-container": "#a77c43", "surface-container-high": "#eae8e5", "tertiary": "#000000", "on-primary": "#ffffff", "surface": "#fbf9f6", "surface-container-low": "#f5f3f0", "primary-fixed": "#e7e1de", "secondary-container": "#c6ebd9", "surface-bright": "#fbf9f6", "on-surface-variant": "#4b4640", "on-primary-container": "#878380", "outline-variant": "#cec5bd", "on-tertiary-fixed": "#2a1800", "on-error-container": "#93000a", "surface-variant": "#e4e2df", "on-error": "#ffffff", "secondary-fixed-dim": "#abcebe", "surface-container-lowest": "#ffffff", "inverse-primary": "#cbc5c2", "on-secondary-container": "#4a6b5d", "surface-dim": "#dbdad7", "secondary-fixed": "#c6ebd9", "on-tertiary": "#ffffff", "on-secondary": "#ffffff", "surface-container-highest": "#e4e2df", "inverse-on-surface": "#f2f0ed", "primary": "#000000", "tertiary-fixed-dim": "#f0bd7e", "surface-container": "#efeeeb", "error": "#ba1a1a", "tertiary-container": "#2a1800", "error-container": "#ffdad6", "secondary": "#446557", "outline": "#7d766f", "inverse-surface": "#30312f", "on-surface": "#1b1c1a", "on-secondary-fixed": "#002116", "on-primary-fixed-variant": "#494644", "on-background": "#1b1c1a", "tertiary-fixed": "#ffddb6", "on-secondary-fixed-variant": "#2d4d40", "on-primary-fixed": "#1d1b19", "primary-fixed-dim": "#cbc5c2" }, "borderRadius": { "DEFAULT": "0.125rem", "lg": "0.25rem", "xl": "0.5rem", "full": "0.75rem" }, "spacing": { "gutter-desktop": "2.5rem", "space-lg": "1.5rem", "space-xs": "0.25rem", "space-xl": "2.5rem", "gutter": "1.5rem", "margin": "1.25rem", "space-sm": "0.5rem", "margin-desktop": "4rem", "space-md": "1rem" }, "fontFamily": { "headline-lg": ["Playfair Display"], "label-badge": ["Plus Jakarta Sans"], "display-hero": ["Playfair Display"], "body-sm": ["Plus Jakarta Sans"], "display-hero-mobile": ["Playfair Display"], "headline-md": ["Playfair Display"], "label-caps": ["Plus Jakarta Sans"], "body-md": ["Plus Jakarta Sans"], "headline-sm": ["Playfair Display"], "label-numeral": ["Plus Jakarta Sans"], "body-lg": ["Plus Jakarta Sans"], "headline-lg-mobile": ["Playfair Display"] }, "fontSize": { "headline-lg": ["36px", { "lineHeight": "44px", "letterSpacing": "-0.01em", "fontWeight": "400" }], "label-badge": ["10px", { "lineHeight": "14px", "letterSpacing": "0.06em", "fontWeight": "700" }], "display-hero": ["56px", { "lineHeight": "64px", "letterSpacing": "-0.02em", "fontWeight": "400" }], "body-sm": ["13px", { "lineHeight": "20px", "letterSpacing": "0.01em", "fontWeight": "400" }], "display-hero-mobile": ["36px", { "lineHeight": "44px", "letterSpacing": "-0.01em", "fontWeight": "400" }], "headline-md": ["24px", { "lineHeight": "32px", "letterSpacing": "0em", "fontWeight": "500" }], "label-caps": ["11px", { "lineHeight": "16px", "letterSpacing": "0.08em", "fontWeight": "600" }], "body-md": ["15px", { "lineHeight": "24px", "letterSpacing": "0em", "fontWeight": "400" }], "headline-sm": ["20px", { "lineHeight": "28px", "letterSpacing": "0em", "fontWeight": "500" }], "label-numeral": ["14px", { "lineHeight": "20px", "letterSpacing": "-0.01em", "fontWeight": "600" }], "body-lg": ["18px", { "lineHeight": "28px", "letterSpacing": "-0.01em", "fontWeight": "400" }], "headline-lg-mobile": ["28px", { "lineHeight": "36px", "letterSpacing": "0em", "fontWeight": "400" }] } } } }</script>
+</head>
+
+<body class="bg-surface font-body-md text-on-surface antialiased">
+  <header class="fixed top-0 inset-x-0 z-50 bg-surface/90 backdrop-blur-xl shadow-[0_1px_8px_rgba(0,0,0,0.04)]">
+    <div
+      class="w-full bg-primary text-on-primary py-space-xs px-margin lg:px-margin-desktop text-center flex items-center justify-center gap-space-sm">
+      <span class="font-label-badge text-label-badge uppercase tracking-wider text-secondary-fixed">Tier
+        Unlocked</span><span
+        class="font-body-sm text-body-sm text-surface-variant font-light tracking-wide">Complimentary White Glove
+        Delivery on Ritual Bundles • Add 1 more item to unlock 20% OFF!</span>
+    </div>
+    <div class="h-20 max-w-7xl mx-auto px-margin lg:px-margin-desktop flex items-center justify-between gap-gutter">
+      <div class="flex items-center gap-gutter"><a class="flex flex-col group" href="#"><span
+            class="font-headline-md text-headline-md font-normal tracking-tight text-on-surface group-hover:text-secondary transition-colors">Curated
+            Atelier</span><span
+            class="font-label-caps text-label-caps uppercase text-on-surface-variant tracking-[0.2em] -mt-1">Apothecary
+            &amp; Rituals</span></a>
+        <nav class="hidden lg:flex items-center gap-space-md ml-gutter"
+          data-active-classes="bg-surface-container-high text-on-surface font-bold rounded-lg"><a aria-current="page"
+            class="px-space-md py-space-xs transition-colors bg-surface-container-high text-on-surface font-bold rounded-lg"
+            data-path="bespoke-bundler" href="#">Bespoke Bundler</a><a
+            class="px-space-md py-space-xs font-body-sm text-body-sm text-on-surface-variant hover:text-on-surface transition-colors"
+            data-path="formulations" href="#">Formulations</a><a
+            class="px-space-md py-space-xs font-body-sm text-body-sm text-on-surface-variant hover:text-on-surface transition-colors"
+            data-path="discovery-sets" href="#">Discovery Sets</a><a
+            class="px-space-md py-space-xs font-body-sm text-body-sm text-on-surface-variant hover:text-on-surface transition-colors"
+            data-path="philosophy" href="#">Philosophy</a><a
+            class="px-space-md py-space-xs font-body-sm text-body-sm text-on-surface-variant hover:text-on-surface transition-colors"
+            data-path="account" href="#">Account</a></nav>
+      </div>
+      <div class="flex items-center gap-space-lg"><button aria-label="View Atelier Box"
+          class="relative flex items-center gap-space-sm py-space-xs px-space-md rounded-full bg-surface-container-low hover:bg-surface-container-high transition-colors group"
+          type="button"><span
+            class="material-symbols-outlined text-[20px] text-on-surface-variant group-hover:text-on-surface transition-colors">inventory_2</span><span
+            class="font-label-caps text-label-caps uppercase text-on-surface hidden sm:inline">Box Atelier</span><span
+            class="inline-flex items-center justify-center px-space-xs py-0.5 rounded-full bg-secondary-container text-on-secondary-container font-label-badge text-label-badge">2
+            / 3</span></button>
+        <div class="w-8 h-8 rounded-full bg-primary flex items-center justify-center shrink-0"><span
+            class="material-symbols-outlined text-on-primary text-[18px]">person</span></div>
+      </div>
+    </div>
+  </header>
+  <main class="w-full pt-20 bg-surface min-h-[calc(100vh-20rem)]">
+    <div class="flex flex-col w-full">
+      <!-- Top Milestone Progress Ribbon -->
+      <section class="w-full bg-surface-container-low/70 py-space-md px-margin lg:px-margin-desktop shadow-sm">
+        <div class="max-w-7xl mx-auto flex flex-col gap-space-sm">
+          <div class="flex flex-col md:flex-row md:items-center justify-between gap-space-sm">
+            <div class="flex items-center gap-space-sm">
+              <span
+                class="inline-flex items-center justify-center w-6 h-6 rounded-full bg-secondary text-on-secondary text-label-badge font-label-badge">2/3</span>
+              <span class="font-headline-sm pt-10 text-headline-sm text-on-surface">Tier 2 Active: 10% Bundle Privileges
+                Applied</span>
+              <span
+                class="hidden sm:inline-block px-2.5 py-0.5 rounded-full bg-secondary-container text-on-secondary-container font-label-badge text-label-badge tracking-wider uppercase">Saved
+                $15.20</span>
+            </div>
+            <div
+              class="flex items-center gap-space-xs text-on-tertiary-container bg-tertiary-fixed/40 px-space-md py-1 rounded-full">
+              <span class="material-symbols-outlined text-[18px]">auto_awesome</span>
+              <span class="font-body-sm text-body-sm font-medium">Add 1 more formula to unlock <strong>20% OFF
+                  Coffret</strong> • Code <strong>BUNDLE20</strong></span>
+            </div>
+          </div>
+          <!-- 3-Tier Visual Gauge -->
+          <div class="relative pt-space-xs pb-1">
+            <div class="w-full h-1.5 bg-surface-container-highest rounded-full overflow-hidden">
+              <div class="h-full bg-secondary transition-all duration-700 ease-out" id="bundle-progress-bar"
+                style="width: 66.66%;"></div>
+            </div>
+            <div class="grid grid-cols-3 pt-space-xs text-left">
+              <!-- Step 1 -->
+              <div class="flex items-center gap-space-xs">
+                <span class="material-symbols-outlined text-secondary text-[16px]"
+                  style="font-variation-settings: 'FILL' 1;">check_circle</span>
+                <div class="flex flex-col">
+                  <span class="font-label-caps text-label-caps text-on-surface uppercase">Tier 01 • 1 Formulation</span>
+                  <span class="font-body-sm text-[11px] text-on-surface-variant leading-none">Standard Retail</span>
+                </div>
+              </div>
+              <!-- Step 2 -->
+              <div class="flex items-center justify-center gap-space-xs">
+                <span class="material-symbols-outlined text-secondary text-[16px]"
+                  style="font-variation-settings: 'FILL' 1;">check_circle</span>
+                <div class="flex flex-col">
+                  <span class="font-label-caps text-label-caps text-secondary font-bold uppercase">Tier 02 • 2
+                    Formulations</span>
+                  <span class="font-body-sm text-[11px] text-secondary leading-none">10% Off Unlocked</span>
+                </div>
+              </div>
+              <!-- Step 3 -->
+              <div class="flex items-center justify-end gap-space-xs text-right">
+                <span
+                  class="material-symbols-outlined text-on-tertiary-container text-[16px]">radio_button_unchecked</span>
+                <div class="flex flex-col">
+                  <span class="font-label-caps text-label-caps text-on-tertiary-container uppercase">Tier 03 • 3
+                    Formulations</span>
+                  <span class="font-body-sm text-[11px] text-on-surface-variant leading-none">20% Off Coffret</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+      <!-- Main Atelier Splitted Workspace: 1440px Architecture -->
+      <div class="w-full max-w-7xl mx-auto px-margin lg:px-margin-desktop py-space-xl">
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-gutter-desktop items-start">
+          <!-- LEFT COLUMN: Sticky Modular Coffret Visualizer & Valuation (~45% width) -->
+          <aside class="lg:col-span-5 flex flex-col gap-space-lg lg:sticky lg:top-28">
+            <!-- Coffret Presentation Box Container -->
+            <div class="bg-surface-container-lowest p-space-lg rounded-xl shadow-[0_8px_30px_rgb(0,0,0,0.04)] relative">
+              <!-- Background decorative subtle stamp -->
+              <div class="flex items-start justify-between pb-space-md">
+                <div>
+                  <span class="font-label-caps text-label-caps uppercase tracking-[0.2em] text-secondary">Modular
+                    Vessel</span>
+                  <h2 class="font-headline-md text-headline-md text-on-surface tracking-tight mt-0.5">The Presentation
+                    Coffret</h2>
+                  <p class="font-body-sm text-body-sm text-on-surface-variant font-light">Custom debossed linen keepsake
+                    box with velvet apothecary dividers.</p>
+                </div>
+                <span
+                  class="inline-flex items-center gap-1 px-2.5 py-1 rounded bg-surface-container text-on-surface-variant font-label-badge text-label-badge uppercase tracking-wider">
+                  <span class="w-1.5 h-1.5 rounded-full bg-secondary"></span> 2 / 3 Filled
+                </span>
+              </div>
+              <!-- Interactive 3-Slot Modular Tray -->
+              <div class="flex flex-col gap-space-sm pt-space-xs">
+                <!-- Slot 01: Amber Serum (Filled) -->
+                <div
+                  class="group relative flex items-center gap-space-md p-space-sm bg-surface-container-low rounded-lg transition-all duration-300"
+                  id="slot-1">
+                  <div
+                    class="w-16 h-20 rounded bg-surface-container-highest shrink-0 overflow-hidden relative shadow-sm">
+                    <img class="w-full h-full object-cover"
+                      data-alt="Amber glass apothecary dropper bottle containing golden botanical serum against a soft warm stone textured surface, luxury minimalist beauty lighting."
+                      src="https://lh3.googleusercontent.com/aida-public/AB6AXuDlN25PKXYVJmpT3SdsE5Pw1u5LmB0CL25_7qqjFvpoBXIR6gku2ARPa_16UPZS-RLDgxjkm6wDWE3ZBu3zRu7mK8ycUoUbifCV6mAPz5nQgLngr1yWX0sB_ZPbznrjdmFuJ4N9FlpizJ5rQBRT5aP3qPjkCmjZMPFgiNcER0aH4SgB_IasBMbaGSXXs4QcUi4z3fYX4LeMj-hPKHllPTc9j6zIXNfEWIC3p3lqcqvbu3PzcQnT6gdH" />
+                    <span
+                      class="absolute bottom-1 left-1 bg-primary text-on-primary font-label-badge text-[9px] px-1 py-0.2 rounded uppercase">30ml</span>
+                  </div>
+                  <div class="flex flex-col flex-1 min-w-0 pr-space-md">
+                    <div class="flex items-center gap-2">
+                      <span class="font-label-caps text-[10px] text-secondary uppercase font-semibold">Slot 01 • Locked
+                        In</span>
+                    </div>
+                    <h4 class="font-headline-sm text-[16px] leading-tight text-on-surface truncate">Amber Revitalizing
+                      Serum</h4>
+                    <p class="font-body-sm text-[12px] text-on-surface-variant truncate">Aura Botanica • Bakuchiol &amp;
+                      CoQ10</p>
+                    <div class="flex items-center gap-2 mt-1">
+                      <span class="font-label-numeral text-label-numeral text-on-surface">$68.00</span>
+                      <span class="text-[11px] text-secondary font-medium font-body-sm">10% Applied ($61.20)</span>
+                    </div>
+                  </div>
+                  <button
+                    class="w-7 h-7 rounded-full bg-surface-container-high hover:bg-surface-variant text-on-surface-variant hover:text-on-surface flex items-center justify-center transition-colors"
+                    onclick="removeItem(1)" title="Remove formulation" type="button">
+                    <span class="material-symbols-outlined text-[16px]">close</span>
+                  </button>
+                </div>
+                <!-- Slot 02: Velvet Creme (Filled) -->
+                <div
+                  class="group relative flex items-center gap-space-md p-space-sm bg-surface-container-low rounded-lg transition-all duration-300"
+                  id="slot-2">
+                  <div
+                    class="w-16 h-20 rounded bg-surface-container-highest shrink-0 overflow-hidden relative shadow-sm">
+                    <img class="w-full h-full object-cover"
+                      data-alt="Sculptural frosted white glass moisturizer jar with matte charcoal lid resting on an ivory marble surface, delicate natural warm daylight."
+                      src="https://lh3.googleusercontent.com/aida-public/AB6AXuAgrV89kZ9mwfj1GFjuEuaz3k-zrfq4q282YvBe3Oc81uDeWnSW8JZMwtR1Hca1IrndKTNrDmX8TVE7pnUXcOBcUci0gMk_syLQ9h9MRurOPhdsO_m8kFhBZwzVV1Cbnr2TZw4DsiPB8bY6m998lixFZPRBuie-wquMboxOaRbZRY4kN6nUlEvFFiGeor3DrW_YZI-xBYF8xGO5cbevKbUYrJVFGOtpjyAwPBiiOsKWV4A9ruNhFq90" />
+                    <span
+                      class="absolute bottom-1 left-1 bg-primary text-on-primary font-label-badge text-[9px] px-1 py-0.2 rounded uppercase">50ml</span>
+                  </div>
+                  <div class="flex flex-col flex-1 min-w-0 pr-space-md">
+                    <div class="flex items-center gap-2">
+                      <span class="font-label-caps text-[10px] text-secondary uppercase font-semibold">Slot 02 • Locked
+                        In</span>
+                    </div>
+                    <h4 class="font-headline-sm text-[16px] leading-tight text-on-surface truncate">Velvet Crème
+                      Hydratante</h4>
+                    <p class="font-body-sm text-[12px] text-on-surface-variant truncate">Aurélia Beauté •
+                      Multi-Ceramides</p>
+                    <div class="flex items-center gap-2 mt-1">
+                      <span class="font-label-numeral text-label-numeral text-on-surface">$84.00</span>
+                      <span class="text-[11px] text-secondary font-medium font-body-sm">10% Applied ($75.60)</span>
+                    </div>
+                  </div>
+                  <button
+                    class="w-7 h-7 rounded-full bg-surface-container-high hover:bg-surface-variant text-on-surface-variant hover:text-on-surface flex items-center justify-center transition-colors"
+                    onclick="removeItem(2)" title="Remove formulation" type="button">
+                    <span class="material-symbols-outlined text-[16px]">close</span>
+                  </button>
+                </div>
+                <!-- Slot 03: Empty Active Target -->
+                <div
+                  class="group relative flex items-center gap-space-md p-space-md bg-surface-container/60 rounded-lg hover:bg-surface-container transition-all cursor-pointer shadow-[inset_0_2px_4px_0_rgba(26,24,22,0.02)]"
+                  id="slot-3-box">
+                  <div
+                    class="w-16 h-20 rounded bg-surface-container-high/60 shrink-0 flex items-center justify-center text-on-tertiary-container group-hover:scale-105 transition-transform">
+                    <span class="material-symbols-outlined text-[28px] animate-pulse">add_circle</span>
+                  </div>
+                  <div class="flex flex-col flex-1 min-w-0">
+                    <div class="flex items-center gap-2">
+                      <span
+                        class="font-label-badge text-[10px] uppercase font-bold text-on-tertiary-container tracking-wider">Slot
+                        03 • Awaiting Selection</span>
+                    </div>
+                    <h4 class="font-headline-sm text-[16px] text-on-surface">Select 3rd Formulation</h4>
+                    <p class="font-body-sm text-[12px] text-on-surface-variant leading-snug">Choose from the dispensary
+                      to elevate to <strong>20% tier savings</strong> on your entire coffret.</p>
+                  </div>
+                  <span class="material-symbols-outlined text-outline-variant text-[20px]">arrow_downward</span>
+                </div>
+              </div>
+              <!-- Subtle unboxing tactile guarantee -->
+              <div
+                class="mt-space-md pt-space-sm flex items-center justify-between text-on-surface-variant font-body-sm text-[12px]">
+                <span class="flex items-center gap-1.5"><span
+                    class="material-symbols-outlined text-[16px] text-secondary">verified</span> Archival Magnetic
+                  Clasp</span>
+                <span class="flex items-center gap-1.5"><span
+                    class="material-symbols-outlined text-[16px] text-secondary">eco</span> FSC® Recycled French
+                  Linen</span>
+              </div>
+            </div>
+            <!-- Dynamic Bundle Valuation Summary Card -->
+            <div class="bg-surface-container-low p-space-lg rounded-xl flex flex-col gap-space-md shadow-sm">
+              <div class="flex items-center justify-between">
+                <span class="font-label-caps text-label-caps uppercase tracking-wider text-on-surface-variant">Coffret
+                  Valuation</span>
+                <span
+                  class="font-label-badge text-label-badge px-2 py-0.5 rounded bg-secondary-container text-on-secondary-container">Code:
+                  TIER10</span>
+              </div>
+              <div class="flex flex-col gap-space-xs text-on-surface">
+                <div class="flex items-center justify-between font-body-sm text-body-sm">
+                  <span class="text-on-surface-variant">Combined Dispensary Retail</span>
+                  <span class="font-label-numeral text-label-numeral line-through text-outline">$152.00</span>
+                </div>
+                <div class="flex items-center justify-between font-body-sm text-body-sm text-secondary">
+                  <span class="flex items-center gap-1">
+                    <span>Tier 02 Bundle Privilege (10%)</span>
+                    <span class="material-symbols-outlined text-[15px]">info</span>
+                  </span>
+                  <span class="font-label-numeral text-label-numeral font-bold">-$15.20</span>
+                </div>
+                <div class="flex items-center justify-between font-body-sm text-body-sm text-on-surface-variant">
+                  <span>Bespoke Linen Presentation Coffret</span>
+                  <span class="font-label-caps text-label-caps uppercase tracking-wide text-secondary">Complimentary
+                    ($35 Value)</span>
+                </div>
+                <div class="flex items-center justify-between font-body-sm text-body-sm text-on-surface-variant">
+                  <span>White Glove Dispensary Shipping</span>
+                  <span
+                    class="font-label-caps text-label-caps uppercase tracking-wide text-secondary">Complimentary</span>
+                </div>
+                <div class="pt-space-sm mt-space-xs flex items-baseline justify-between">
+                  <div class="flex flex-col">
+                    <span class="font-headline-sm text-headline-sm text-on-surface">Total Investment</span>
+                    <span class="font-body-sm text-[11px] text-on-surface-variant">Taxes calculated at dispatch
+                      checkout</span>
+                  </div>
+                  <div class="text-right">
+                    <span
+                      class="font-headline-md text-[28px] font-semibold text-on-surface tracking-tight leading-none">$136.80</span>
+                    <span class="block font-body-sm text-[11px] text-secondary font-medium mt-1">You save $50.20
+                      total</span>
+                  </div>
+                </div>
+              </div>
+              <!-- Tier 3 Incentive Banner Inside Pricing -->
+              <div class="p-space-sm rounded-lg bg-surface-container-high/60 flex items-center gap-space-sm">
+                <div
+                  class="w-8 h-8 rounded-full bg-secondary-container text-on-secondary-container flex items-center justify-center shrink-0">
+                  <span class="material-symbols-outlined text-[18px]">percent</span>
+                </div>
+                <p class="font-body-sm text-[12px] text-on-surface-variant leading-snug">
+                  Add any 3rd formula ($42+) to unlock <strong class="text-on-surface font-semibold">20% off all
+                    three</strong> items, netting higher savings than buying individually.
+                </p>
+              </div>
+              <!-- Checkout Trigger Button -->
+              <button
+                class="w-full py-3.5 px-space-lg rounded-lg bg-primary hover:bg-on-surface-variant text-on-primary font-body-md font-semibold text-[15px] flex items-center justify-between transition-all duration-200 shadow-md group"
+                type="button">
+                <span class="flex items-center gap-2">
+                  <span class="material-symbols-outlined text-[18px]">lock</span>
+                  Claim Bespoke Coffret
+                </span>
+                <span
+                  class="flex items-center gap-1 font-label-numeral group-hover:translate-x-0.5 transition-transform">
+                  $136.80
+                  <span class="material-symbols-outlined text-[18px]">arrow_forward</span>
+                </span>
+              </button>
+              <!-- Headless GraphQL Technical Specs Badge -->
+              <div class="px-space-md py-space-xs rounded bg-surface-container-highest/70 flex flex-col gap-0.5">
+                <div class="flex items-center justify-between text-[10px] text-on-surface-variant font-label-caps">
+                  <span>HEADLESS STOREFRONT ENGINE</span>
+                  <span class="text-secondary font-bold">READY</span>
+                </div>
+                <code class="font-mono text-[10px] text-on-surface-variant/80 truncate">
+              cartCreate(lines: [{id:"curated_box_02", qty:1}], meta: {tier: "10_pct_tier2"})
+            </code>
+              </div>
+              <!-- Guarantees micro-grid -->
+              <div class="grid grid-cols-3 gap-space-xs pt-space-xs text-center">
+                <div class="flex flex-col items-center">
+                  <span class="material-symbols-outlined text-[20px] text-on-surface-variant">package_2</span>
+                  <span class="font-label-caps text-[9px] uppercase text-on-surface-variant mt-1">Insured
+                    Packaging</span>
+                </div>
+                <div class="flex flex-col items-center">
+                  <span class="material-symbols-outlined text-[20px] text-on-surface-variant">loyalty</span>
+                  <span class="font-label-caps text-[9px] uppercase text-on-surface-variant mt-1">3 Botanical
+                    Vials</span>
+                </div>
+                <div class="flex flex-col items-center">
+                  <span class="material-symbols-outlined text-[20px] text-on-surface-variant">nest_eco_leaf</span>
+                  <span class="font-label-caps text-[9px] uppercase text-on-surface-variant mt-1">Carbon Neutral</span>
+                </div>
+              </div>
+            </div>
+          </aside>
+          <!-- RIGHT COLUMN: Dispensary Curation Catalog (~55% width) -->
+          <section class="lg:col-span-7 flex flex-col gap-space-lg">
+            <!-- Dispensary Header & Filters -->
+            <div class="flex flex-col gap-space-md">
+              <div class="flex flex-col sm:flex-row sm:items-end justify-between gap-space-sm">
+                <div>
+                  <span class="font-label-caps text-label-caps uppercase tracking-[0.2em] text-secondary">Apothecary
+                    Dispensary</span>
+                  <h1 class="font-headline-lg text-headline-lg text-on-surface tracking-tight mt-0.5">Curate The
+                    Formulations</h1>
+                  <p class="font-body-md text-body-md text-on-surface-variant font-light mt-1">Select your final piece
+                    to complete the three-tier ritual balance.</p>
+                </div>
+                <!-- Sort Trigger -->
+                <div class="flex items-center gap-space-xs shrink-0">
+                  <span class="font-label-caps text-label-caps text-on-surface-variant uppercase">Arrange:</span>
+                  <select
+                    class="bg-surface-container-low text-on-surface font-body-sm text-body-sm py-1.5 px-3 rounded-lg focus:outline-none cursor-pointer">
+                    <option>Featured Atelier Curation</option>
+                    <option>Formulation Price: Low to High</option>
+                    <option>Formulation Price: High to Low</option>
+                    <option>Pharmacist Rating</option>
+                  </select>
+                </div>
+              </div>
+              <!-- Category Filter Tabs -->
+              <div class="flex items-center gap-2 overflow-x-auto pb-1 no-scrollbar">
+                <button
+                  class="px-space-md py-1.5 rounded-full bg-primary text-on-primary font-body-sm text-body-sm font-medium whitespace-nowrap shadow-sm"
+                  type="button">All Formulations (8)</button>
+                <button
+                  class="px-space-md py-1.5 rounded-full bg-surface-container-low hover:bg-surface-container-high text-on-surface-variant hover:text-on-surface font-body-sm text-body-sm transition-colors whitespace-nowrap"
+                  type="button">Botanical Serums</button>
+                <button
+                  class="px-space-md py-1.5 rounded-full bg-surface-container-low hover:bg-surface-container-high text-on-surface-variant hover:text-on-surface font-body-sm text-body-sm transition-colors whitespace-nowrap"
+                  type="button">Moisturizers &amp; Balms</button>
+                <button
+                  class="px-space-md py-1.5 rounded-full bg-surface-container-low hover:bg-surface-container-high text-on-surface-variant hover:text-on-surface font-body-sm text-body-sm transition-colors whitespace-nowrap"
+                  type="button">Targeted Eye Care</button>
+                <button
+                  class="px-space-md py-1.5 rounded-full bg-surface-container-low hover:bg-surface-container-high text-on-surface-variant hover:text-on-surface font-body-sm text-body-sm transition-colors whitespace-nowrap"
+                  type="button">Gentle Cleansers</button>
+              </div>
+            </div>
+            <!-- Product Cards Grid: High Density Sensory Presentation -->
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-space-md">
+              <!-- Card 1: Cleansing Elixir -->
+              <div
+                class="bg-surface-container-lowest p-space-md rounded-xl flex flex-col justify-between group hover:shadow-lg transition-all duration-300 relative">
+                <div
+                  class="relative w-full aspect-[4/3] bg-surface-container-low rounded-lg overflow-hidden flex items-center justify-center p-space-sm mb-space-sm">
+                  <img class="w-full h-full object-contain group-hover:scale-105 transition-transform duration-500"
+                    data-alt="Minimalist luxury glass pump bottle with pale green chamomile cleanser standing on rough plaster pedestal under soft directional editorial lighting."
+                    src="https://lh3.googleusercontent.com/aida-public/AB6AXuAGIh6ezv84qkaEFakrxBeD-foNhTMI2ZNzjHXFfZNH91VeGvnWjIEGmuWTmVQxCdV6Zy0zGyzYDmyXGcsDZLScuS7qOwsApNk7KCBqUEL3Ro-DEXHP2-CHAZE9r7x2dZOGUERnm7U7NxJx799b1bcB65zF9GfatVC0pr07GvugEoIOisoG-2T2DG8Cz_XiDbLCxF-vwuLEGTfR5_I95qZnTyKTz6QAMBT1xMuiSKWQI9_z6lzLadPb" />
+                  <span
+                    class="absolute top-2 left-2 px-2 py-0.5 rounded bg-surface-container-lowest/90 backdrop-blur-sm text-on-surface font-label-badge text-label-badge uppercase">100ml</span>
+                  <span
+                    class="absolute top-2 right-2 px-2 py-0.5 rounded-full bg-secondary-container text-on-secondary-container font-label-caps text-[10px] uppercase">Soothing</span>
+                </div>
+                <div class="flex flex-col gap-1">
+                  <div
+                    class="flex items-center justify-between text-on-surface-variant font-label-caps text-label-caps">
+                    <span>AURA BOTANICA</span>
+                    <span class="flex items-center text-on-tertiary-container"><span
+                        class="material-symbols-outlined text-[14px]"
+                        style="font-variation-settings: 'FILL' 1;">star</span> 4.9 (128)</span>
+                  </div>
+                  <h3 class="font-headline-sm text-[18px] text-on-surface group-hover:text-secondary transition-colors">
+                    Gentle Camomile Cleansing Elixir</h3>
+                  <p class="font-body-sm text-[12px] text-on-surface-variant line-clamp-2">Cold-pressed German chamomile
+                    flower extract blended with bioactive squalane.</p>
+                  <div class="flex items-center gap-1.5 py-1">
+                    <span
+                      class="px-1.5 py-0.5 rounded bg-surface-container text-on-surface-variant text-[10px] font-label-badge uppercase">Bisabolol</span>
+                    <span
+                      class="px-1.5 py-0.5 rounded bg-surface-container text-on-surface-variant text-[10px] font-label-badge uppercase">Squalane</span>
+                  </div>
+                </div>
+                <div class="flex items-center justify-between pt-space-sm mt-space-xs">
+                  <div class="flex flex-col">
+                    <span class="font-label-numeral text-headline-sm text-[17px] text-on-surface">$42.00</span>
+                    <span class="font-body-sm text-[11px] text-secondary font-medium">With 20% tier: $33.60</span>
+                  </div>
+                  <button
+                    class="py-2 px-space-md rounded-lg bg-surface-container hover:bg-primary text-on-surface hover:text-on-primary font-body-sm font-semibold text-body-sm transition-all flex items-center gap-1 shadow-sm"
+                    onclick="selectItem('Gentle Camomile Cleansing Elixir', '$42.00')" type="button">
+                    <span class="material-symbols-outlined text-[16px]">add</span> Add to Box
+                  </button>
+                </div>
+              </div>
+              <!-- Card 2: Peptide Eye Repair -->
+              <div
+                class="bg-surface-container-lowest p-space-md rounded-xl flex flex-col justify-between group hover:shadow-lg transition-all duration-300 relative">
+                <div
+                  class="relative w-full aspect-[4/3] bg-surface-container-low rounded-lg overflow-hidden flex items-center justify-center p-space-sm mb-space-sm">
+                  <img class="w-full h-full object-contain group-hover:scale-105 transition-transform duration-500"
+                    data-alt="Slender matte black luxury cosmetic tube with silver metal applicator tip against sand-colored background with soft dramatic shadows."
+                    src="https://lh3.googleusercontent.com/aida-public/AB6AXuDDc6qcZXbzSQ5X5AxXdOBbGw9jhmkyfwj5S76icRXzd6CD4rd_pjin84n7NZ_6TVWRatgjsdvTfwLbl9qxFy8Ran4-Anr49E-oWJ4DyxON5vxYrJDyWMRACmm0L7lV-UoxudhYVESTiMmROO5JvosPPNUVZF28C8rTyPPLiMF1v1Tzj0ebMAVv8H41lVpwhr03J0Ve0Sj0sFZzl8yZOYgOUJiBsHBvQ5HvyEQmeVYl3mzNLX97PY-i" />
+                  <span
+                    class="absolute top-2 left-2 px-2 py-0.5 rounded bg-surface-container-lowest/90 backdrop-blur-sm text-on-surface font-label-badge text-label-badge uppercase">20ml</span>
+                  <span
+                    class="absolute top-2 right-2 px-2 py-0.5 rounded-full bg-error-container text-on-error-container font-label-caps text-[10px] uppercase font-bold">Low
+                    Stock: 4 Left</span>
+                </div>
+                <div class="flex flex-col gap-1">
+                  <div
+                    class="flex items-center justify-between text-on-surface-variant font-label-caps text-label-caps">
+                    <span>LUMIÈRE CÉLESTE</span>
+                    <span class="flex items-center text-on-tertiary-container"><span
+                        class="material-symbols-outlined text-[14px]"
+                        style="font-variation-settings: 'FILL' 1;">star</span> 5.0 (89)</span>
+                  </div>
+                  <h3 class="font-headline-sm text-[18px] text-on-surface group-hover:text-secondary transition-colors">
+                    Peptide Contour Eye Repair</h3>
+                  <p class="font-body-sm text-[12px] text-on-surface-variant line-clamp-2">Hexapeptide-8 micro-infusion
+                    targeting dynamic orbital expression lines.</p>
+                  <div class="flex items-center gap-1.5 py-1">
+                    <span
+                      class="px-1.5 py-0.5 rounded bg-surface-container text-on-surface-variant text-[10px] font-label-badge uppercase">Hexapeptide</span>
+                    <span
+                      class="px-1.5 py-0.5 rounded bg-surface-container text-on-surface-variant text-[10px] font-label-badge uppercase">Caffeine</span>
+                  </div>
+                </div>
+                <div class="flex items-center justify-between pt-space-sm mt-space-xs">
+                  <div class="flex flex-col">
+                    <span class="font-label-numeral text-headline-sm text-[17px] text-on-surface">$56.00</span>
+                    <span class="font-body-sm text-[11px] text-secondary font-medium">With 20% tier: $44.80</span>
+                  </div>
+                  <button
+                    class="py-2 px-space-md rounded-lg bg-surface-container hover:bg-primary text-on-surface hover:text-on-primary font-body-sm font-semibold text-body-sm transition-all flex items-center gap-1 shadow-sm"
+                    onclick="selectItem('Peptide Contour Eye Repair', '$56.00')" type="button">
+                    <span class="material-symbols-outlined text-[16px]">add</span> Add to Box
+                  </button>
+                </div>
+              </div>
+              <!-- Card 3: Amber Serum (Already Added - Slot 01) -->
+              <div
+                class="bg-surface-container-low/70 p-space-md rounded-xl flex flex-col justify-between relative opacity-85">
+                <div
+                  class="relative w-full aspect-[4/3] bg-surface-container rounded-lg overflow-hidden flex items-center justify-center p-space-sm mb-space-sm">
+                  <img class="w-full h-full object-contain grayscale-[30%]"
+                    data-alt="Luxury amber dropper vial on limestone podium with diffused warm sunshine casting long shadows."
+                    src="https://lh3.googleusercontent.com/aida-public/AB6AXuABLRBoBgzZSm5BneVz9Vk3-k25pfTP8Cavv0RqAKmdo_Z3cJi3D4gzrqRdH7e62ecxocZigZMjBDjD13a1kkbkbVLMXRJ7WZvPxwkjSa3MK18ZIcJAA6gZfvIok7wJU04UJ-DDHjoslMDN580wEPCT33VtgweIWmvlYzlKPqvyJlGSQWS9WTdvd6QCvagqjaje-cSfRQgNH5UvD69jhaNyO8ASgqU0GgfgeKrWXIFIQzWN1AM8Gv9D" />
+                  <span
+                    class="absolute top-2 left-2 px-2 py-0.5 rounded bg-surface-container-lowest/90 backdrop-blur-sm text-on-surface font-label-badge text-label-badge uppercase">30ml</span>
+                  <span
+                    class="absolute top-2 right-2 px-2.5 py-0.5 rounded-full bg-secondary text-on-secondary font-label-caps text-[10px] uppercase font-bold flex items-center gap-1">
+                    <span class="material-symbols-outlined text-[12px]">check</span> In Coffret (Slot 01)
+                  </span>
+                </div>
+                <div class="flex flex-col gap-1">
+                  <div
+                    class="flex items-center justify-between text-on-surface-variant font-label-caps text-label-caps">
+                    <span>AURA BOTANICA</span>
+                    <span class="flex items-center text-on-tertiary-container"><span
+                        class="material-symbols-outlined text-[14px]"
+                        style="font-variation-settings: 'FILL' 1;">star</span> 4.9 (240)</span>
+                  </div>
+                  <h3 class="font-headline-sm text-[18px] text-on-surface">Amber Revitalizing Serum</h3>
+                  <p class="font-body-sm text-[12px] text-on-surface-variant line-clamp-2">Bio-fermented active
+                    botanicals engineered for cellular collagen revival.</p>
+                  <div class="flex items-center gap-1.5 py-1">
+                    <span
+                      class="px-1.5 py-0.5 rounded bg-surface-container text-on-surface-variant text-[10px] font-label-badge uppercase">Bakuchiol</span>
+                    <span
+                      class="px-1.5 py-0.5 rounded bg-surface-container text-on-surface-variant text-[10px] font-label-badge uppercase">CoQ10</span>
+                  </div>
+                </div>
+                <div class="flex items-center justify-between pt-space-sm mt-space-xs">
+                  <span class="font-label-numeral text-headline-sm text-[17px] text-on-surface">$68.00</span>
+                  <button
+                    class="py-2 px-space-md rounded-lg bg-surface-container-highest text-on-surface-variant font-body-sm font-medium text-body-sm cursor-not-allowed flex items-center gap-1"
+                    disabled="" type="button">
+                    <span class="material-symbols-outlined text-[16px]">done</span> Added to Box
+                  </button>
+                </div>
+              </div>
+              <!-- Card 4: Velvet Crème (Already Added - Slot 02) -->
+              <div
+                class="bg-surface-container-low/70 p-space-md rounded-xl flex flex-col justify-between relative opacity-85">
+                <div
+                  class="relative w-full aspect-[4/3] bg-surface-container rounded-lg overflow-hidden flex items-center justify-center p-space-sm mb-space-sm">
+                  <img class="w-full h-full object-contain grayscale-[30%]"
+                    data-alt="Heavy frosted glass luxury moisturizer jar with charcoal lid on a sunlit alabaster vanity counter."
+                    src="https://lh3.googleusercontent.com/aida-public/AB6AXuDsG49WNrIfpSWPxmKTn1FFQKxMsltABSgnlsARBpEyoieF_lcbWbzcIiEiTcpvUvaMdeJ7Xyv2eL5Xn4fZBVIOKN_ElTPebA7awXu5ghGjHx5F7n3ddp4OZBJaBK-F77piqf0DICFTX14g4SMf8Qtlb1Vfb_BcoxrJ6b8VaWSF9hC2t4b_legbY1Tf3sC2b5alC4RowPsMfqYZcYyuKr5dUkWiNTAqg0Shd3RIITo9_iXc7NXIpXiV" />
+                  <span
+                    class="absolute top-2 left-2 px-2 py-0.5 rounded bg-surface-container-lowest/90 backdrop-blur-sm text-on-surface font-label-badge text-label-badge uppercase">50ml</span>
+                  <span
+                    class="absolute top-2 right-2 px-2.5 py-0.5 rounded-full bg-secondary text-on-secondary font-label-caps text-[10px] uppercase font-bold flex items-center gap-1">
+                    <span class="material-symbols-outlined text-[12px]">check</span> In Coffret (Slot 02)
+                  </span>
+                </div>
+                <div class="flex flex-col gap-1">
+                  <div
+                    class="flex items-center justify-between text-on-surface-variant font-label-caps text-label-caps">
+                    <span>AURÉLIA BEAUTÉ</span>
+                    <span class="flex items-center text-on-tertiary-container"><span
+                        class="material-symbols-outlined text-[14px]"
+                        style="font-variation-settings: 'FILL' 1;">star</span> 5.0 (312)</span>
+                  </div>
+                  <h3 class="font-headline-sm text-[18px] text-on-surface">Velvet Crème Hydratante</h3>
+                  <p class="font-body-sm text-[12px] text-on-surface-variant line-clamp-2">Five weight biomimetic
+                    ceramide matrix with French coastal sea kelp.</p>
+                  <div class="flex items-center gap-1.5 py-1">
+                    <span
+                      class="px-1.5 py-0.5 rounded bg-surface-container text-on-surface-variant text-[10px] font-label-badge uppercase">Ceramides</span>
+                    <span
+                      class="px-1.5 py-0.5 rounded bg-surface-container text-on-surface-variant text-[10px] font-label-badge uppercase">Sea
+                      Kelp</span>
+                  </div>
+                </div>
+                <div class="flex items-center justify-between pt-space-sm mt-space-xs">
+                  <span class="font-label-numeral text-headline-sm text-[17px] text-on-surface">$84.00</span>
+                  <button
+                    class="py-2 px-space-md rounded-lg bg-surface-container-highest text-on-surface-variant font-body-sm font-medium text-body-sm cursor-not-allowed flex items-center gap-1"
+                    disabled="" type="button">
+                    <span class="material-symbols-outlined text-[16px]">done</span> Added to Box
+                  </button>
+                </div>
+              </div>
+              <!-- Card 5: Niacinamide Nectar -->
+              <div
+                class="bg-surface-container-lowest p-space-md rounded-xl flex flex-col justify-between group hover:shadow-lg transition-all duration-300 relative">
+                <div
+                  class="relative w-full aspect-[4/3] bg-surface-container-low rounded-lg overflow-hidden flex items-center justify-center p-space-sm mb-space-sm">
+                  <img class="w-full h-full object-contain group-hover:scale-105 transition-transform duration-500"
+                    data-alt="Clear apothecary dropper bottle with shimmering iridescent serum placed against a warm linen and ceramic background."
+                    src="https://lh3.googleusercontent.com/aida-public/AB6AXuAuSIuCIH2iWfFf5TDP4L2m0eLpV7Z88Fiiw93COvlZ1d0_qAEvvpQ0iGS5XrHJSflulkLw_E2GvzehSL_Rw016Ehdw5itDC7EEb4x7TCJlmUOz9MwI45sqq0VyM0Fl4PUJ0Yml88Lk9SCM2y14DeYO6xwIcFfe8k1UZe_oKbdcNh0Nwdd99vf1f-sNQnpBpNeKLgF9cR9TnqVmvcJ8zI1aY2z3aJ5bYN-9l4CkZakajB0DlLJrWYfB" />
+                  <span
+                    class="absolute top-2 left-2 px-2 py-0.5 rounded bg-surface-container-lowest/90 backdrop-blur-sm text-on-surface font-label-badge text-label-badge uppercase">30ml</span>
+                  <span
+                    class="absolute top-2 right-2 px-2 py-0.5 rounded-full bg-secondary-container text-on-secondary-container font-label-caps text-[10px] uppercase">Brightening</span>
+                </div>
+                <div class="flex flex-col gap-1">
+                  <div
+                    class="flex items-center justify-between text-on-surface-variant font-label-caps text-label-caps">
+                    <span>LUMIÈRE CÉLESTE</span>
+                    <span class="flex items-center text-on-tertiary-container"><span
+                        class="material-symbols-outlined text-[14px]"
+                        style="font-variation-settings: 'FILL' 1;">star</span> 4.8 (115)</span>
+                  </div>
+                  <h3 class="font-headline-sm text-[18px] text-on-surface group-hover:text-secondary transition-colors">
+                    Niacinamide Radiance Nectar</h3>
+                  <p class="font-body-sm text-[12px] text-on-surface-variant line-clamp-2">Concentrated 10% Vitamin B3
+                    with pure zinc PCA and fermented elderberry.</p>
+                  <div class="flex items-center gap-1.5 py-1">
+                    <span
+                      class="px-1.5 py-0.5 rounded bg-surface-container text-on-surface-variant text-[10px] font-label-badge uppercase">10%
+                      B3</span>
+                    <span
+                      class="px-1.5 py-0.5 rounded bg-surface-container text-on-surface-variant text-[10px] font-label-badge uppercase">Zinc
+                      PCA</span>
+                  </div>
+                </div>
+                <div class="flex items-center justify-between pt-space-sm mt-space-xs">
+                  <div class="flex flex-col">
+                    <span class="font-label-numeral text-headline-sm text-[17px] text-on-surface">$62.00</span>
+                    <span class="font-body-sm text-[11px] text-secondary font-medium">With 20% tier: $49.60</span>
+                  </div>
+                  <button
+                    class="py-2 px-space-md rounded-lg bg-surface-container hover:bg-primary text-on-surface hover:text-on-primary font-body-sm font-semibold text-body-sm transition-all flex items-center gap-1 shadow-sm"
+                    onclick="selectItem('Niacinamide Radiance Nectar', '$62.00')" type="button">
+                    <span class="material-symbols-outlined text-[16px]">add</span> Add to Box
+                  </button>
+                </div>
+              </div>
+              <!-- Card 6: Restoring Oil -->
+              <div
+                class="bg-surface-container-lowest p-space-md rounded-xl flex flex-col justify-between group hover:shadow-lg transition-all duration-300 relative">
+                <div
+                  class="relative w-full aspect-[4/3] bg-surface-container-low rounded-lg overflow-hidden flex items-center justify-center p-space-sm mb-space-sm">
+                  <img class="w-full h-full object-contain group-hover:scale-105 transition-transform duration-500"
+                    data-alt="Deep emerald green glass luxury facial oil bottle beside dried wild botanicals and porous natural travertine stone."
+                    src="https://lh3.googleusercontent.com/aida-public/AB6AXuB0LA8s10Fjhxzo1iIs29hDWvOLUIalodFD3F7mbwBOw8ci_u8gd-J0Skp3r5oUAz1Ou60DPIIcWsIl1yvJNH_SmI5YhPMJX1fYVOlpqxADySyiJIJu9RV6TogzT_XkDHNbK4r2iDpDCZsa5sHagK26Xs5gPR9VOt2nSUOIOo6fG6Ow2cpZNDrJwOft6U7Y2ho7nuiTPOWZbg6lmqL319K7HXGP6sgMrYIEx_RGb7QJgq470se8Dvmu" />
+                  <span
+                    class="absolute top-2 left-2 px-2 py-0.5 rounded bg-surface-container-lowest/90 backdrop-blur-sm text-on-surface font-label-badge text-label-badge uppercase">30ml</span>
+                  <span
+                    class="absolute top-2 right-2 px-2 py-0.5 rounded-full bg-secondary-container text-on-secondary-container font-label-caps text-[10px] uppercase">Lipid
+                    Barrier</span>
+                </div>
+                <div class="flex flex-col gap-1">
+                  <div
+                    class="flex items-center justify-between text-on-surface-variant font-label-caps text-label-caps">
+                    <span>AURA BOTANICA</span>
+                    <span class="flex items-center text-on-tertiary-container"><span
+                        class="material-symbols-outlined text-[14px]"
+                        style="font-variation-settings: 'FILL' 1;">star</span> 4.9 (176)</span>
+                  </div>
+                  <h3 class="font-headline-sm text-[18px] text-on-surface group-hover:text-secondary transition-colors">
+                    Botanical Barrier Restoring Oil</h3>
+                  <p class="font-body-sm text-[12px] text-on-surface-variant line-clamp-2">Omega-rich cold-pressed
+                    meadowfoam and prickly pear seed lipids.</p>
+                  <div class="flex items-center gap-1.5 py-1">
+                    <span
+                      class="px-1.5 py-0.5 rounded bg-surface-container text-on-surface-variant text-[10px] font-label-badge uppercase">Prickly
+                      Pear</span>
+                    <span
+                      class="px-1.5 py-0.5 rounded bg-surface-container text-on-surface-variant text-[10px] font-label-badge uppercase">Meadowfoam</span>
+                  </div>
+                </div>
+                <div class="flex items-center justify-between pt-space-sm mt-space-xs">
+                  <div class="flex flex-col">
+                    <span class="font-label-numeral text-headline-sm text-[17px] text-on-surface">$74.00</span>
+                    <span class="font-body-sm text-[11px] text-secondary font-medium">With 20% tier: $59.20</span>
+                  </div>
+                  <button
+                    class="py-2 px-space-md rounded-lg bg-surface-container hover:bg-primary text-on-surface hover:text-on-primary font-body-sm font-semibold text-body-sm transition-all flex items-center gap-1 shadow-sm"
+                    onclick="selectItem('Botanical Barrier Restoring Oil', '$74.00')" type="button">
+                    <span class="material-symbols-outlined text-[16px]">add</span> Add to Box
+                  </button>
+                </div>
+              </div>
+            </div>
+            <!-- Botanical Efficacy Callout / Footnote Banner -->
+            <div
+              class="p-space-lg rounded-xl bg-surface-container-low flex flex-col md:flex-row items-center justify-between gap-space-md mt-space-md">
+              <div class="flex items-center gap-space-md">
+                <div
+                  class="w-12 h-12 rounded-full bg-secondary-container text-on-secondary-container flex items-center justify-center shrink-0">
+                  <span class="material-symbols-outlined text-[24px]">science</span>
+                </div>
+                <div class="flex flex-col">
+                  <span class="font-headline-sm text-[17px] text-on-surface">Synergistic Bioactive Pairing</span>
+                  <p class="font-body-sm text-body-sm text-on-surface-variant">Each coffret formulation is chemically
+                    balanced to enhance dermal absorption when applied in numbered sequence.</p>
+                </div>
+              </div>
+              <button
+                class="whitespace-nowrap px-space-md py-2 rounded-lg bg-surface-container-high hover:bg-surface-variant text-on-surface font-body-sm font-semibold text-body-sm transition-colors"
+                type="button">
+                Consult Regimen Chart
+              </button>
+            </div>
+          </section>
+        </div>
+      </div>
+      <!-- Interactive State Engine -->
+      <script>
+        function selectItem(title, priceStr) {
+          const slotBox = document.getElementById('slot-3-box');
+          if (!slotBox) return;
+
+          const price = parseFloat(priceStr.replace('$', ''));
+          const combinedTotal = (152.00 + price) * 0.8; // 20% discount on 3 items
+
+          slotBox.className = "group relative flex items-center gap-space-md p-space-sm bg-surface-container-low rounded-lg transition-all duration-300 shadow-sm";
+          slotBox.innerHTML = `
+        <div class="w-16 h-20 rounded bg-secondary-container/40 shrink-0 flex items-center justify-center text-on-secondary-container shadow-sm">
+          <span class="material-symbols-outlined text-[28px]">sanitizer</span>
+        </div>
+        <div class="flex flex-col flex-1 min-w-0 pr-space-md">
+          <div class="flex items-center gap-2">
+            <span class="font-label-caps text-[10px] text-secondary uppercase font-semibold">Slot 03 • Complete (20% Unlocked)</span>
+          </div>
+          <h4 class="font-headline-sm text-[16px] leading-tight text-on-surface truncate">${title}</h4>
+          <p class="font-body-sm text-[12px] text-on-surface-variant truncate">Atelier Formulation • Added</p>
+          <div class="flex items-center gap-2 mt-1">
+            <span class="font-label-numeral text-label-numeral text-on-surface">${priceStr}</span>
+            <span class="text-[11px] text-secondary font-bold font-body-sm">20% Bundle Tier Active</span>
+          </div>
+        </div>
+        <button type="button" onclick="removeItem(3)" class="w-7 h-7 rounded-full bg-surface-container-high hover:bg-surface-variant text-on-surface-variant hover:text-on-surface flex items-center justify-center transition-colors" title="Remove formulation">
+          <span class="material-symbols-outlined text-[16px]">close</span>
+        </button>
+      `;
+
+          const bar = document.getElementById('bundle-progress-bar');
+          if (bar) bar.style.width = '100%';
+        }
+
+        function removeItem(slotNum) {
+          if (slotNum === 3) {
+            const slotBox = document.getElementById('slot-3-box');
+            if (!slotBox) return;
+            slotBox.className = "group relative flex items-center gap-space-md p-space-md bg-surface-container/60 rounded-lg hover:bg-surface-container transition-all cursor-pointer shadow-[inset_0_2px_4px_0_rgba(26,24,22,0.02)]";
+            slotBox.innerHTML = `
+          <div class="w-16 h-20 rounded bg-surface-container-high/60 shrink-0 flex items-center justify-center text-on-tertiary-container group-hover:scale-105 transition-transform">
+            <span class="material-symbols-outlined text-[28px] animate-pulse">add_circle</span>
+          </div>
+          <div class="flex flex-col flex-1 min-w-0">
+            <div class="flex items-center gap-2">
+              <span class="font-label-badge text-[10px] uppercase font-bold text-on-tertiary-container tracking-wider">Slot 03 • Awaiting Selection</span>
+            </div>
+            <h4 class="font-headline-sm text-[16px] text-on-surface">Select 3rd Formulation</h4>
+            <p class="font-body-sm text-[12px] text-on-surface-variant leading-snug">Choose from the dispensary to elevate to <strong>20% tier savings</strong> on your entire coffret.</p>
+          </div>
+          <span class="material-symbols-outlined text-outline-variant text-[20px]">arrow_downward</span>
+        `;
+            const bar = document.getElementById('bundle-progress-bar');
+            if (bar) bar.style.width = '66.66%';
+          } else {
+            alert("Slot 0" + slotNum + " removed. Browse the dispensary to select a replacement formula.");
+          }
+        }
+      </script>
+    </div>
+  </main>
+  <footer class="w-full bg-surface-container-low text-on-surface mt-space-xl">
+    <div class="max-w-7xl mx-auto px-margin lg:px-margin-desktop py-space-xl">
+      <div class="grid grid-cols-1 md:grid-cols-12 gap-gutter-desktop">
+        <div class="md:col-span-5 flex flex-col gap-space-md"><span
+            class="font-headline-md text-headline-md font-normal text-on-surface">Curated Atelier</span>
+          <p class="font-body-md text-body-md text-on-surface-variant max-w-md font-light">Bespoke cosmetic formulations
+            crafted with disciplined intentionality. Elevating daily regimens through customizable three-tier physical
+            apothecary bundles.</p>
+          <div class="flex items-center gap-space-md pt-space-xs"><span
+              class="font-label-caps text-label-caps text-secondary uppercase">White Glove Dispensary</span><span
+              class="w-1.5 h-1.5 rounded-full bg-outline-variant"></span><span
+              class="font-label-caps text-label-caps text-on-surface-variant uppercase">Clean Botanical Purity</span>
+          </div>
+        </div>
+        <div class="md:col-span-2 flex flex-col gap-space-sm"><span
+            class="font-label-caps text-label-caps uppercase tracking-wider text-on-surface">Atelier</span><a
+            class="font-body-sm text-body-sm text-on-surface-variant hover:text-on-surface transition-colors"
+            data-path="bespoke-bundler" href="#">Smart Box Bundler</a><a
+            class="font-body-sm text-body-sm text-on-surface-variant hover:text-on-surface transition-colors"
+            data-path="formulations" href="#">Active Formulations</a><a
+            class="font-body-sm text-body-sm text-on-surface-variant hover:text-on-surface transition-colors"
+            data-path="discovery-sets" href="#">Curated Discovery</a><a
+            class="font-body-sm text-body-sm text-on-surface-variant hover:text-on-surface transition-colors"
+            data-path="bespoke-gifting" href="#">Artisanal Gifting</a></div>
+        <div class="md:col-span-2 flex flex-col gap-space-sm"><span
+            class="font-label-caps text-label-caps uppercase tracking-wider text-on-surface">Heritage</span><a
+            class="font-body-sm text-body-sm text-on-surface-variant hover:text-on-surface transition-colors"
+            data-path="philosophy" href="#">Formulation Philosophy</a><a
+            class="font-body-sm text-body-sm text-on-surface-variant hover:text-on-surface transition-colors"
+            data-path="botanical-sourcing" href="#">Sustainable Sourcing</a><a
+            class="font-body-sm text-body-sm text-on-surface-variant hover:text-on-surface transition-colors"
+            data-path="clinical-rituals" href="#">Regimen Guides</a><a
+            class="font-body-sm text-body-sm text-on-surface-variant hover:text-on-surface transition-colors"
+            data-path="press-editorial" href="#">Editorial Archive</a></div>
+        <div class="md:col-span-3 flex flex-col gap-space-sm"><span
+            class="font-label-caps text-label-caps uppercase tracking-wider text-on-surface">Private Concierge</span>
+          <p class="font-body-sm text-body-sm text-on-surface-variant font-light">Inquire with our licensed dermal
+            pharmacists for tailored box regimen consultations.</p><a
+            class="font-body-sm text-body-sm text-on-surface hover:text-secondary underline underline-offset-4 transition-colors pt-space-xs"
+            href="mailto:concierge@curatedatelier.com">concierge@curatedatelier.com</a>
+        </div>
+      </div>
+      <div
+        class="mt-space-xl pt-space-lg flex flex-col sm:flex-row items-center justify-between gap-space-md text-on-surface-variant">
+        <span class="font-body-sm text-body-sm">© 2025 Curated Atelier Apothecary Inc. All rights reserved.</span>
+        <div class="flex items-center gap-space-lg font-body-sm text-body-sm"><a
+            class="hover:text-on-surface transition-colors" href="#">Privacy Policy</a><a
+            class="hover:text-on-surface transition-colors" href="#">Terms of Dispensary</a><a
+            class="hover:text-on-surface transition-colors" href="#">Shipping &amp; Unboxing</a></div>
+      </div>
+    </div>
+  </footer>
+</body>
+
+</html>

@@ -1,0 +1,19 @@
+.announcement-bar {
+  width: inherit;
+  background-color: black;
+  height: 2vh;
+  color: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 10px;
+  display: flex;
+}
+
+.announcement-bar p {
+  font-size: small;
+}
+
+.announcement-bar p span {
+  font-weight: 600;
+}

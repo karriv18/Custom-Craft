@@ -1,0 +1,25 @@
+{{ 'main.css' | asset_url | stylesheet_tag }}
+
+<section class="main-section">
+  <div class="left-section">
+    <div class="left-section-main-container">
+      <p></p>
+    </div>
+    <div class="left-section-receipt-container"></div>
+  </div>
+  <div class="right-section">
+    <p></p>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Main",
+  "settings": [],
+  "presets": [
+    {
+      "name": "main"
+    }
+  ]
+}
+{% endschema %}
