@@ -1,0 +1,847 @@
+<style>
+  :root {
+    --at-bg: #fbf9f6;
+    --at-surface: #ffffff;
+    --at-surface-low: #f5f3f0;
+    --at-surface-high: #eae8e5;
+    --at-text: #1b1c1a;
+    --at-text-muted: #5e5954;
+    --at-primary: #121212;
+    --at-accent: #335948;
+    --at-accent-light: #d6ebe1;
+    --at-border: #e3ded8;
+    --at-radius: 8px;
+  }
+
+  .atelier-bundler {
+    background-color: var(--at-bg);
+    color: var(--at-text);
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    padding-bottom: 60px;
+    display: block;
+    min-height: 100vh;
+  }
+
+  .atelier-container {
+    max-width: 1380px;
+    margin: 0 auto;
+    padding: 0 24px;
+  }
+
+  .eyebrow-tag {
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: 0.15em;
+    color: var(--at-accent);
+    font-weight: 600;
+    display: block;
+  }
+
+  .milestone-ribbon {
+    background: var(--at-surface-low);
+    padding: 20px 0;
+    border-bottom: 1px solid var(--at-border);
+  }
+  .ribbon-summary {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 12px;
+  }
+  .badge-counter {
+    background: var(--at-accent);
+    color: #fff;
+    font-size: 11px;
+    font-weight: bold;
+    padding: 3px 8px;
+    border-radius: 12px;
+  }
+  .tier-headline {
+    font-size: 16px;
+    font-weight: 600;
+    margin-left: 8px;
+  }
+  .ribbon-callout {
+    background: #fbf2e5;
+    color: #7b4e13;
+    padding: 6px 14px;
+    border-radius: 20px;
+    font-size: 13px;
+  }
+
+  .gauge-wrapper {
+    margin-top: 14px;
+  }
+  .gauge-track {
+    width: 100%;
+    height: 6px;
+    background: var(--at-surface-high);
+    border-radius: 3px;
+    overflow: hidden;
+  }
+  .gauge-fill {
+    height: 100%;
+    background: var(--at-accent);
+    transition: width 0.4s ease;
+  }
+  .gauge-steps {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    margin-top: 8px;
+    font-size: 11px;
+  }
+  .gauge-step:nth-child(2) {
+    text-align: center;
+  }
+  .gauge-step:nth-child(3) {
+    text-align: right;
+  }
+  .step-title {
+    display: block;
+    font-weight: 600;
+  }
+  .step-desc {
+    color: var(--at-text-muted);
+  }
+
+  .bundler-workspace {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 40px;
+    margin-top: 40px;
+  }
+
+  @media (min-width: 1024px) {
+    .bundler-workspace {
+      grid-template-columns: 4.5fr 7.5fr;
+      align-items: start;
+    }
+    .bundler-sidebar {
+      position: sticky;
+      top: 30px;
+    }
+  }
+
+  .coffret-vessel-card,
+  .valuation-card {
+    background: var(--at-surface);
+    border: 1px solid var(--at-border);
+    border-radius: var(--at-radius);
+    padding: 24px;
+    margin-bottom: 24px;
+  }
+  .card-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin-bottom: 20px;
+  }
+  .card-title {
+    font-size: 20px;
+    font-family: Georgia, serif;
+    margin: 4px 0;
+  }
+  .card-desc {
+    font-size: 13px;
+    color: var(--at-text-muted);
+  }
+  .slot-counter-badge {
+    background: var(--at-surface-low);
+    font-size: 11px;
+    padding: 4px 8px;
+    border-radius: 4px;
+    font-weight: 600;
+  }
+
+  .slots-container {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+  }
+  .coffret-slot {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    padding: 10px;
+    border-radius: var(--at-radius);
+    background: var(--at-surface-low);
+    border: 1px dashed var(--at-border);
+  }
+  .coffret-slot.filled {
+    border-style: solid;
+    border-color: transparent;
+    background: #fdfdfd;
+    box-shadow: 0 1px 4px rgba(0, 0, 0, 0.05);
+  }
+  .slot-placeholder {
+    width: 52px;
+    height: 64px;
+    background: var(--at-surface-high);
+    border-radius: 4px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 20px;
+    color: var(--at-text-muted);
+  }
+  .coffret-slot.filled img {
+    width: 52px;
+    height: 64px;
+    object-fit: cover;
+    border-radius: 4px;
+  }
+  .slot-info {
+    flex: 1;
+  }
+  .slot-tag {
+    font-size: 10px;
+    text-transform: uppercase;
+    color: var(--at-accent);
+    font-weight: 600;
+  }
+  .slot-title {
+    font-size: 14px;
+    margin: 2px 0;
+  }
+  .btn-slot-remove {
+    background: none;
+    border: none;
+    cursor: pointer;
+    font-size: 16px;
+    color: var(--at-text-muted);
+    padding: 4px 8px;
+  }
+
+  .vessel-tactile-guarantee {
+    display: flex;
+    justify-content: space-between;
+    font-size: 11px;
+    color: var(--at-text-muted);
+    margin-top: 18px;
+    padding-top: 12px;
+    border-top: 1px solid var(--at-surface-low);
+  }
+
+  .valuation-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 16px;
+  }
+  .discount-pill {
+    background: var(--at-accent-light);
+    color: var(--at-accent);
+    font-size: 11px;
+    padding: 3px 8px;
+    border-radius: 4px;
+    font-weight: 600;
+  }
+  .valuation-breakdown {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    font-size: 14px;
+  }
+  .breakdown-row {
+    display: flex;
+    justify-content: space-between;
+  }
+  .discount-row {
+    color: var(--at-accent);
+    font-weight: 600;
+  }
+  .free-tag {
+    font-size: 11px;
+    color: var(--at-accent);
+    text-transform: uppercase;
+  }
+  .total-row {
+    margin-top: 12px;
+    padding-top: 14px;
+    border-top: 1px solid var(--at-border);
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+  }
+  .total-label {
+    font-size: 16px;
+    font-weight: bold;
+  }
+  .tax-disclaimer {
+    display: block;
+    font-size: 11px;
+    color: var(--at-text-muted);
+  }
+  .final-price {
+    font-size: 24px;
+    font-weight: 700;
+  }
+
+  .btn-checkout {
+    width: 100%;
+    padding: 16px;
+    background: var(--at-primary);
+    color: #fff;
+    border: none;
+    border-radius: var(--at-radius);
+    font-size: 15px;
+    font-weight: 600;
+    display: flex;
+    justify-content: space-between;
+    cursor: pointer;
+    margin-top: 20px;
+  }
+
+  .catalog-title {
+    font-family: Georgia, serif;
+    font-size: 32px;
+    margin: 4px 0;
+  }
+  .catalog-subtitle {
+    color: var(--at-text-muted);
+    font-size: 15px;
+    margin-bottom: 24px;
+  }
+  .product-cards-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 20px;
+  }
+  @media (min-width: 600px) {
+    .product-cards-grid {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+
+  .dispensary-card {
+    background: var(--at-surface);
+    border: 1px solid var(--at-border);
+    border-radius: var(--at-radius);
+    padding: 16px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+  }
+  .card-media {
+    position: relative;
+    background: var(--at-surface-low);
+    border-radius: 4px;
+    overflow: hidden;
+    aspect-ratio: 4/3;
+    margin-bottom: 12px;
+  }
+  .card-media img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+  .vendor-tag {
+    font-size: 10px;
+    color: var(--at-text-muted);
+    text-transform: uppercase;
+  }
+  .product-title {
+    font-size: 16px;
+    margin: 4px 0;
+  }
+  .product-excerpt {
+    font-size: 12px;
+    color: var(--at-text-muted);
+    line-height: 1.4;
+  }
+  .card-action-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 16px;
+    padding-top: 10px;
+  }
+  .card-price {
+    font-weight: 600;
+    font-size: 15px;
+  }
+  .btn-add-slot {
+    background: var(--at-surface-high);
+    border: none;
+    padding: 8px 14px;
+    border-radius: 6px;
+    font-weight: 600;
+    font-size: 13px;
+    cursor: pointer;
+  }
+
+  .atelier-navbar {
+    background-color: rgba(251, 249, 246, 0.95);
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid var(--at-border);
+    position: sticky;
+    top: 0;
+    z-index: 40;
+  }
+
+  .navbar-inner {
+    height: 72px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  .brand-block {
+    display: flex;
+    flex-direction: column;
+    text-decoration: none;
+    color: inherit;
+  }
+
+  .brand-title {
+    font-family: Georgia, serif;
+    font-size: 22px;
+    font-weight: 500;
+    letter-spacing: -0.01em;
+    line-height: 1.1;
+  }
+
+  .brand-subtitle {
+    font-size: 10px;
+    text-transform: uppercase;
+    letter-spacing: 0.18em;
+    color: var(--at-text-muted);
+    margin-top: 2px;
+  }
+
+  .nav-links {
+    display: none;
+    align-items: center;
+    gap: 8px;
+  }
+
+  @media (min-width: 992px) {
+    .nav-links {
+      display: flex;
+    }
+  }
+
+  .nav-link-item {
+    font-size: 13px;
+    text-decoration: none;
+    color: var(--at-text-muted);
+    padding: 8px 14px;
+    border-radius: 6px;
+    transition: all 0.2s ease;
+  }
+
+  .nav-link-item:hover {
+    color: var(--at-text);
+    background-color: var(--at-surface-low);
+  }
+
+  .nav-link-item.active {
+    color: var(--at-text);
+    background-color: var(--at-surface-high);
+    font-weight: 600;
+  }
+
+  .nav-actions {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+
+  .box-atelier-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    background-color: var(--at-surface-low);
+    border: 1px solid var(--at-border);
+    padding: 8px 14px;
+    border-radius: 9999px;
+    font-size: 12px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    color: var(--at-text);
+    cursor: pointer;
+  }
+
+  .nav-box-count {
+    background-color: var(--at-accent-light);
+    color: var(--at-accent);
+    font-size: 10px;
+    font-weight: 700;
+    padding: 2px 7px;
+    border-radius: 9999px;
+  }
+
+  .user-avatar-pill {
+    width: 34px;
+    height: 34px;
+    border-radius: 50%;
+    background-color: var(--at-primary);
+    color: #fff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  /* 1. Make Announcement Bar fixed at the absolute top */
+  .atelier-announcement-bar {
+    background-color: #121212;
+    color: #ffffff;
+    font-size: 12px;
+    padding: 10px 24px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 12px;
+    text-align: center;
+    letter-spacing: 0.02em;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    width: 100%;
+    height: 38px;
+    box-sizing: border-box;
+    z-index: 50;
+  }
+
+  .announcement-badge {
+    background-color: #c6ebd9;
+    color: #002116;
+    font-size: 10px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    padding: 2px 8px;
+    border-radius: 4px;
+  }
+
+  /* 2. Anchor Navbar directly below the 38px announcement bar */
+  .atelier-navbar {
+    background-color: rgba(251, 249, 246, 0.95);
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid var(--at-border);
+    position: fixed;
+    top: 38px;
+    left: 0;
+    right: 0;
+    width: 100%;
+    z-index: 40;
+  }
+
+  .milestone-ribbon {
+    margin-top: 110px;
+    background: var(--at-surface-low);
+    padding: 20px 0;
+    border-bottom: 1px solid var(--at-border);
+  }
+
+  @media (min-width: 1024px) {
+    .bundler-sidebar {
+      position: sticky;
+      top: 130px;
+    }
+  }
+</style>
+
+<div class="atelier-bundler" id="AtelierBundler-{{ section.id }}">
+  <div class="atelier-announcement-bar">
+    <span class="announcement-badge">Tier Unlocked</span>
+    <span>Complimentary White Glove Delivery on Ritual Bundles • Code <strong>BUNDLE20</strong> applied</span>
+  </div>
+
+  <!-- NAVIGATION HEADER -->
+  <nav class="atelier-navbar">
+    <div class="atelier-container navbar-inner">
+      <a href="#" class="brand-block">
+        <span class="brand-title">Curated Atelier</span>
+        <span class="brand-subtitle">Apothecary &amp; Rituals</span>
+      </a>
+
+      <div class="nav-links">
+        <a href="#" class="nav-link-item active">Bespoke Bundler</a>
+        <a href="#" class="nav-link-item">Formulations</a>
+        <a href="#" class="nav-link-item">Discovery Sets</a>
+        <a href="#" class="nav-link-item">Philosophy</a>
+        <a href="#" class="nav-link-item">Account</a>
+      </div>
+
+      <div class="nav-actions">
+        <button type="button" class="box-atelier-btn">
+          <svg
+            width="16"
+            height="16"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+          >
+            <path d="M21 8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16Z"></path>
+            <path d="m3.3 7 8.7 5 8.7-5"></path>
+            <path d="M12 22V12"></path>
+          </svg>
+          <span>Box Atelier</span>
+          <span class="nav-box-count">3 / 3</span>
+        </button>
+
+        <div class="user-avatar-pill">
+          <svg
+            width="16"
+            height="16"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+          >
+            <path d="M19 21v-2a4 4 0 0 0-4-4H9a4 4 0 0 0-4 4v2"></path>
+            <circle cx="12" cy="7" r="4"></circle>
+          </svg>
+        </div>
+      </div>
+    </div>
+  </nav>
+  <div class="milestone-ribbon">
+    <div class="atelier-container">
+      <div class="ribbon-summary">
+        <div>
+          <span class="badge-counter">3/3</span>
+          <span class="tier-headline">Tier 03 Active: 20% Full Coffret Privileges Unlocked</span>
+        </div>
+        <div class="ribbon-callout">
+          <span><strong>Maximum Tier Unlocked!</strong> (Code: BUNDLE20)</span>
+        </div>
+      </div>
+      <div class="gauge-wrapper">
+        <div class="gauge-track">
+          <!-- 100% Filled Bar -->
+          <div class="gauge-fill" style="width: 100%;"></div>
+        </div>
+        <div class="gauge-steps">
+          <div class="gauge-step">
+            <span class="step-title">Tier 01 • 1 Item</span>
+            <span class="step-desc">Standard Retail</span>
+          </div>
+          <div class="gauge-step">
+            <span class="step-title">Tier 02 • 2 Items</span>
+            <span class="step-desc">10% Off Unlocked</span>
+          </div>
+          <div class="gauge-step">
+            <span class="step-title" style="color: var(--at-accent);">Tier 03 • 3 Items</span>
+            <span class="step-desc" style="color: var(--at-accent); font-weight: 600;">20% Off Coffret</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 2. Main Workspace -->
+  <div class="atelier-container bundler-workspace">
+    <!-- Left Column: Coffret Vessel & Valuation -->
+    <aside class="bundler-sidebar">
+      <div class="coffret-vessel-card">
+        <div class="card-header">
+          <div>
+            <span class="eyebrow-tag">Modular Vessel</span>
+            <h2 class="card-title">The Presentation Coffret</h2>
+            <p class="card-desc">Keepsake archival box with botanical dividers.</p>
+          </div>
+          <span class="slot-counter-badge">3 / 3 Filled</span>
+        </div>
+
+        <!-- 3 HARDCODED FILLED SLOTS -->
+        <div class="slots-container">
+          <!-- Slot 1 -->
+          <div class="coffret-slot filled">
+            <img
+              src="https://images.unsplash.com/photo-1556228720-195a672e8a03?auto=format&fit=crop&w=400&q=80"
+              alt="Cleansing Elixir"
+            />
+            <div class="slot-info">
+              <span class="slot-tag">Slot 01 • Locked In</span>
+              <h4 class="slot-title">Gentle Camomile Cleansing Elixir</h4>
+              <span style="font-size:12px; font-weight:600;">$42.00</span>
+            </div>
+            <button type="button" class="btn-slot-remove">✕</button>
+          </div>
+
+          <!-- Slot 2 -->
+          <div class="coffret-slot filled">
+            <img
+              src="https://images.unsplash.com/photo-1570172619644-dfd03ed5d881?auto=format&fit=crop&w=400&q=80"
+              alt="Eye Repair"
+            />
+            <div class="slot-info">
+              <span class="slot-tag">Slot 02 • Locked In</span>
+              <h4 class="slot-title">Peptide Contour Eye Repair</h4>
+              <span style="font-size:12px; font-weight:600;">$56.00</span>
+            </div>
+            <button type="button" class="btn-slot-remove">✕</button>
+          </div>
+
+          <!-- Slot 3 -->
+          <div class="coffret-slot filled">
+            <img
+              src="https://images.unsplash.com/photo-1620916566398-39f1143ab7be?auto=format&fit=crop&w=400&q=80"
+              alt="Amber Serum"
+            />
+            <div class="slot-info">
+              <span class="slot-tag">Slot 03 • Locked In</span>
+              <h4 class="slot-title">Amber Revitalizing Serum</h4>
+              <span style="font-size:12px; font-weight:600;">$68.00</span>
+            </div>
+            <button type="button" class="btn-slot-remove">✕</button>
+          </div>
+        </div>
+
+        <div class="vessel-tactile-guarantee">
+          <span>✓ Archival Magnetic Clasp</span>
+          <span>✓ FSC® Recycled Linen</span>
+        </div>
+      </div>
+
+      <!-- HARDCODED VALUATION CARD ($42 + $56 + $68 = $166.00 with 20% discount = $132.80) -->
+      <div class="valuation-card">
+        <div class="valuation-header">
+          <span class="eyebrow-tag">Coffret Valuation</span>
+          <span class="discount-pill">20% OFF Coffret</span>
+        </div>
+        <div class="valuation-breakdown">
+          <div class="breakdown-row">
+            <span>Combined Retail</span>
+            <span>$166.00</span>
+          </div>
+          <div class="breakdown-row discount-row">
+            <span>Bundle Privilege Savings (20%)</span>
+            <span>-$33.20</span>
+          </div>
+          <div class="breakdown-row free-perk">
+            <span>Presentation Coffret</span>
+            <span class="free-tag">Complimentary ($35 Value)</span>
+          </div>
+          <div class="breakdown-row free-perk">
+            <span>White Glove Dispatch</span>
+            <span class="free-tag">Complimentary</span>
+          </div>
+          <div class="total-row">
+            <div>
+              <span class="total-label">Total Investment</span>
+              <span class="tax-disclaimer">Taxes calculated at dispatch</span>
+            </div>
+            <span class="final-price">$132.80</span>
+          </div>
+        </div>
+        <button type="button" class="btn-checkout">
+          <span>Claim Bespoke Coffret</span>
+          <span>$132.80 →</span>
+        </button>
+      </div>
+    </aside>
+
+    <!-- Right Column: Product Dispensary -->
+    <main class="bundler-catalog">
+      <header>
+        <span class="eyebrow-tag">Apothecary Dispensary</span>
+        <h1 class="catalog-title">Curate The Formulations</h1>
+        <p class="catalog-subtitle">Select up to 3 formulations to unlock tier-based savings.</p>
+      </header>
+
+      <div class="product-cards-grid">
+        <!-- Item 1 -->
+        <div class="dispensary-card">
+          <div class="card-media">
+            <img
+              src="https://images.unsplash.com/photo-1556228720-195a672e8a03?auto=format&fit=crop&w=400&q=80"
+              alt="Cleansing Elixir"
+              loading="lazy"
+            />
+          </div>
+          <div class="card-details">
+            <span class="vendor-tag">Aura Botanica</span>
+            <h3 class="product-title">Gentle Camomile Cleansing Elixir</h3>
+            <p class="product-excerpt">German chamomile flower extract blended with squalane.</p>
+          </div>
+          <div class="card-action-row">
+            <span class="card-price">$42.00</span>
+            <button type="button" class="btn-add-slot">In Box (Slot 01)</button>
+          </div>
+        </div>
+
+        <!-- Item 2 -->
+        <div class="dispensary-card">
+          <div class="card-media">
+            <img
+              src="https://images.unsplash.com/photo-1570172619644-dfd03ed5d881?auto=format&fit=crop&w=400&q=80"
+              alt="Eye Repair"
+              loading="lazy"
+            />
+          </div>
+          <div class="card-details">
+            <span class="vendor-tag">Lumière Céleste</span>
+            <h3 class="product-title">Peptide Contour Eye Repair</h3>
+            <p class="product-excerpt">Hexapeptide-8 infusion targeting expression lines.</p>
+          </div>
+          <div class="card-action-row">
+            <span class="card-price">$56.00</span>
+            <button type="button" class="btn-add-slot">In Box (Slot 02)</button>
+          </div>
+        </div>
+
+        <!-- Item 3 -->
+        <div class="dispensary-card">
+          <div class="card-media">
+            <img
+              src="https://images.unsplash.com/photo-1620916566398-39f1143ab7be?auto=format&fit=crop&w=400&q=80"
+              alt="Amber Serum"
+              loading="lazy"
+            />
+          </div>
+          <div class="card-details">
+            <span class="vendor-tag">Aura Botanica</span>
+            <h3 class="product-title">Amber Revitalizing Serum</h3>
+            <p class="product-excerpt">Bio-fermented active botanicals for collagen revival.</p>
+          </div>
+          <div class="card-action-row">
+            <span class="card-price">$68.00</span>
+            <button type="button" class="btn-add-slot">In Box (Slot 03)</button>
+          </div>
+        </div>
+
+        <!-- Item 4 -->
+        <div class="dispensary-card">
+          <div class="card-media">
+            <img
+              src="https://images.unsplash.com/photo-1598440947619-2c35fc9aa908?auto=format&fit=crop&w=400&q=80"
+              alt="Velvet Crème"
+              loading="lazy"
+            />
+          </div>
+          <div class="card-details">
+            <span class="vendor-tag">Aurélia Beauté</span>
+            <h3 class="product-title">Velvet Crème Hydratante</h3>
+            <p class="product-excerpt">Biomimetic ceramide matrix formulated with coastal sea kelp.</p>
+          </div>
+          <div class="card-action-row">
+            <span class="card-price">$84.00</span>
+            <button type="button" class="btn-add-slot">Add to Box</button>
+          </div>
+        </div>
+      </div>
+    </main>
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "Bespoke Smart Bundler",
+  "settings": [],
+  "presets": [
+    {
+      "name": "Bespoke Smart Bundler"
+    }
+  ]
+}
+{% endschema %}

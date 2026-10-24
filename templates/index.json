@@ -1,31 +1,11 @@
 {
     "sections": {
-        "announcement-bar": {
-            "type": "announcement-bar",
-            "settings": {}
-        },
-        "header": {
-            "type": "header",
-            "settings": {}
-        },
         "bundle-banner": {
-            "type": "bundle-banner",
-            "settings": {}
-        },
-        "main": {
-            "type": "main",
-            "settings": {}
-        },
-        "footer": {
-            "type": "footer",
+            "type": "bespoke-bundler",
             "settings": {}
         }
     },
     "order": [
-        "announcement-bar",
-        "header",
         "bundle-banner",
-        "main",
-        "footer"
     ]
 }

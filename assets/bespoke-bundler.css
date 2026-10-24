@@ -1,0 +1,399 @@
+/* Color Palette & Layout Defaults */
+:root {
+  --at-bg: #fbf9f6;
+  --at-surface: #ffffff;
+  --at-surface-low: #f5f3f0;
+  --at-surface-high: #eae8e5;
+  --at-text: #1b1c1a;
+  --at-text-muted: #5e5954;
+  --at-primary: #121212;
+  --at-accent: #335948;
+  --at-accent-light: #d6ebe1;
+  --at-border: #e3ded8;
+  --at-radius: 8px;
+}
+
+.atelier-bundler {
+  background-color: var(--at-bg);
+  color: var(--at-text);
+  font-family:
+    -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  padding-bottom: 60px;
+}
+
+.atelier-container {
+  max-width: 1380px;
+  margin: 0 auto;
+  padding: 0 24px;
+}
+
+.eyebrow-tag {
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: 0.15em;
+  color: var(--at-accent);
+  font-weight: 600;
+  display: block;
+}
+
+/* 1. Milestone Ribbon */
+.milestone-ribbon {
+  background: var(--at-surface-low);
+  padding: 20px 0;
+  border-bottom: 1px solid var(--at-border);
+}
+.ribbon-summary {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 12px;
+}
+.badge-counter {
+  background: var(--at-accent);
+  color: #fff;
+  font-size: 11px;
+  font-weight: bold;
+  padding: 3px 8px;
+  border-radius: 12px;
+}
+.tier-headline {
+  font-size: 16px;
+  font-weight: 600;
+  margin-left: 8px;
+}
+.ribbon-callout {
+  background: #fbf2e5;
+  color: #7b4e13;
+  padding: 6px 14px;
+  border-radius: 20px;
+  font-size: 13px;
+}
+
+.gauge-wrapper {
+  margin-top: 14px;
+}
+.gauge-track {
+  width: 100%;
+  height: 6px;
+  background: var(--at-surface-high);
+  border-radius: 3px;
+  overflow: hidden;
+}
+.gauge-fill {
+  height: 100%;
+  background: var(--at-accent);
+  transition: width 0.4s ease;
+}
+.gauge-steps {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  margin-top: 8px;
+  font-size: 11px;
+}
+.gauge-step:nth-child(2) {
+  text-align: center;
+}
+.gauge-step:nth-child(3) {
+  text-align: right;
+}
+.step-title {
+  display: block;
+  font-weight: 600;
+}
+.step-desc {
+  color: var(--at-text-muted);
+}
+
+/* 2. Main Workspace Layout */
+.bundler-workspace {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 40px;
+  margin-top: 40px;
+}
+
+@media (min-width: 1024px) {
+  .bundler-workspace {
+    grid-template-columns: 4.5fr 7.5fr;
+    align-items: start;
+  }
+  .bundler-sidebar {
+    position: sticky;
+    top: 30px;
+  }
+}
+
+/* 3. Coffret Card */
+.coffret-vessel-card,
+.valuation-card {
+  background: var(--at-surface);
+  border: 1px solid var(--at-border);
+  border-radius: var(--at-radius);
+  padding: 24px;
+  margin-bottom: 24px;
+}
+.card-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: 20px;
+}
+.card-title {
+  font-size: 20px;
+  font-family: Georgia, serif;
+  margin: 4px 0;
+}
+.card-desc {
+  font-size: 13px;
+  color: var(--at-text-muted);
+}
+.slot-counter-badge {
+  background: var(--at-surface-low);
+  font-size: 11px;
+  padding: 4px 8px;
+  border-radius: 4px;
+  font-weight: 600;
+}
+
+.slots-container {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+.coffret-slot {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  padding: 10px;
+  border-radius: var(--at-radius);
+  background: var(--at-surface-low);
+  border: 1px dashed var(--at-border);
+}
+.coffret-slot.filled {
+  border-style: solid;
+  border-color: transparent;
+  background: #fdfdfd;
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.05);
+}
+.slot-placeholder {
+  width: 52px;
+  height: 64px;
+  background: var(--at-surface-high);
+  border-radius: 4px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 20px;
+  color: var(--at-text-muted);
+}
+.coffret-slot.filled img {
+  width: 52px;
+  height: 64px;
+  object-fit: cover;
+  border-radius: 4px;
+}
+.slot-info {
+  flex: 1;
+}
+.slot-tag {
+  font-size: 10px;
+  text-transform: uppercase;
+  color: var(--at-accent);
+  font-weight: 600;
+}
+.slot-title {
+  font-size: 14px;
+  margin: 2px 0;
+}
+.btn-slot-remove {
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-size: 16px;
+  color: var(--at-text-muted);
+}
+
+.vessel-tactile-guarantee {
+  display: flex;
+  justify-content: space-between;
+  font-size: 11px;
+  color: var(--at-text-muted);
+  margin-top: 18px;
+  padding-top: 12px;
+  border-top: 1px solid var(--at-surface-low);
+}
+
+/* 4. Valuation Card */
+.valuation-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 16px;
+}
+.discount-pill {
+  background: var(--at-accent-light);
+  color: var(--at-accent);
+  font-size: 11px;
+  padding: 3px 8px;
+  border-radius: 4px;
+  font-weight: 600;
+}
+.valuation-breakdown {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  font-size: 14px;
+}
+.breakdown-row {
+  display: flex;
+  justify-content: space-between;
+}
+.discount-row {
+  color: var(--at-accent);
+  font-weight: 600;
+}
+.free-tag {
+  font-size: 11px;
+  color: var(--at-accent);
+  text-transform: uppercase;
+}
+.total-row {
+  margin-top: 12px;
+  padding-top: 14px;
+  border-top: 1px solid var(--at-border);
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+}
+.total-label {
+  font-size: 16px;
+  font-weight: bold;
+}
+.tax-disclaimer {
+  display: block;
+  font-size: 11px;
+  color: var(--at-text-muted);
+}
+.final-price {
+  font-size: 24px;
+  font-weight: 700;
+}
+
+.btn-checkout {
+  width: 100%;
+  padding: 16px;
+  background: var(--at-primary);
+  color: #fff;
+  border: none;
+  border-radius: var(--at-radius);
+  font-size: 15px;
+  font-weight: 600;
+  display: flex;
+  justify-content: space-between;
+  cursor: pointer;
+  margin-top: 20px;
+}
+.btn-checkout:disabled {
+  background: var(--at-surface-high);
+  color: var(--at-text-muted);
+  cursor: not-allowed;
+}
+
+/* 5. Dispensary Grid */
+.catalog-title {
+  font-family: Georgia, serif;
+  font-size: 32px;
+  margin: 4px 0;
+}
+.catalog-subtitle {
+  color: var(--at-text-muted);
+  font-size: 15px;
+  margin-bottom: 24px;
+}
+.product-cards-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 20px;
+}
+@media (min-width: 600px) {
+  .product-cards-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+.dispensary-card {
+  background: var(--at-surface);
+  border: 1px solid var(--at-border);
+  border-radius: var(--at-radius);
+  padding: 16px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+.card-media {
+  position: relative;
+  background: var(--at-surface-low);
+  border-radius: 4px;
+  overflow: hidden;
+  aspect-ratio: 4/3;
+  margin-bottom: 12px;
+}
+.card-media img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+.badge-sold-out {
+  position: absolute;
+  top: 8px;
+  right: 8px;
+  background: #ba1a1a;
+  color: #fff;
+  font-size: 10px;
+  padding: 3px 6px;
+  border-radius: 3px;
+}
+.vendor-tag {
+  font-size: 10px;
+  color: var(--at-text-muted);
+  text-transform: uppercase;
+}
+.product-title {
+  font-size: 16px;
+  margin: 4px 0;
+}
+.product-excerpt {
+  font-size: 12px;
+  color: var(--at-text-muted);
+  line-height: 1.4;
+}
+.card-action-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 16px;
+  padding-top: 10px;
+}
+.card-price {
+  font-weight: 600;
+  font-size: 15px;
+}
+.btn-add-slot {
+  background: var(--at-surface-high);
+  border: none;
+  padding: 8px 14px;
+  border-radius: 6px;
+  font-weight: 600;
+  font-size: 13px;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+.btn-add-slot:hover {
+  background: var(--at-primary);
+  color: #fff;
+}
+.btn-add-slot:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
