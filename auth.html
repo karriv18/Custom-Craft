@@ -1,0 +1,586 @@
+<!DOCTYPE html>
+
+<html class="scroll-smooth" lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <meta content="web_standard" name="shell-type" />
+    <title>Curated Atelier — Smart Box Bundler</title>
+    <link href="https://fonts.googleapis.com" rel="preconnect" />
+    <link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect" />
+    <link
+        href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;1,400&amp;family=Plus+Jakarta+Sans:wght@400;500;600;700&amp;display=swap"
+        rel="stylesheet" />
+    <link
+        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200"
+        rel="stylesheet" />
+    <link
+        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap"
+        rel="stylesheet" />
+    <link
+        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap"
+        rel="stylesheet" />
+    <style>
+        @layer base {
+
+            html,
+            body {
+                margin: 0;
+                padding: 0;
+            }
+
+            body {
+                overscroll-behavior: none;
+            }
+
+            main>:first-child {
+                margin-top: 0 !important;
+            }
+
+            main>:last-child {
+                margin-bottom: 0 !important;
+            }
+        }
+
+        ::-webkit-scrollbar {
+            display: none;
+        }
+    </style>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script
+        id="tailwind-config">tailwind.config = { darkMode: "class", theme: { extend: { "colors": { "surface-tint": "#615e5b", "background": "#fbf9f6", "on-tertiary-fixed-variant": "#62400b", "primary-container": "#1d1b19", "on-tertiary-container": "#a77c43", "surface-container-high": "#eae8e5", "tertiary": "#000000", "on-primary": "#ffffff", "surface": "#fbf9f6", "surface-container-low": "#f5f3f0", "primary-fixed": "#e7e1de", "secondary-container": "#c6ebd9", "surface-bright": "#fbf9f6", "on-surface-variant": "#4b4640", "on-primary-container": "#878380", "outline-variant": "#cec5bd", "on-tertiary-fixed": "#2a1800", "on-error-container": "#93000a", "surface-variant": "#e4e2df", "on-error": "#ffffff", "secondary-fixed-dim": "#abcebe", "surface-container-lowest": "#ffffff", "inverse-primary": "#cbc5c2", "on-secondary-container": "#4a6b5d", "surface-dim": "#dbdad7", "secondary-fixed": "#c6ebd9", "on-tertiary": "#ffffff", "on-secondary": "#ffffff", "surface-container-highest": "#e4e2df", "inverse-on-surface": "#f2f0ed", "primary": "#000000", "tertiary-fixed-dim": "#f0bd7e", "surface-container": "#efeeeb", "error": "#ba1a1a", "tertiary-container": "#2a1800", "error-container": "#ffdad6", "secondary": "#446557", "outline": "#7d766f", "inverse-surface": "#30312f", "on-surface": "#1b1c1a", "on-secondary-fixed": "#002116", "on-primary-fixed-variant": "#494644", "on-background": "#1b1c1a", "tertiary-fixed": "#ffddb6", "on-secondary-fixed-variant": "#2d4d40", "on-primary-fixed": "#1d1b19", "primary-fixed-dim": "#cbc5c2" }, "borderRadius": { "DEFAULT": "0.125rem", "lg": "0.25rem", "xl": "0.5rem", "full": "0.75rem" }, "spacing": { "gutter-desktop": "2.5rem", "space-lg": "1.5rem", "space-xs": "0.25rem", "space-xl": "2.5rem", "gutter": "1.5rem", "margin": "1.25rem", "space-sm": "0.5rem", "margin-desktop": "4rem", "space-md": "1rem" }, "fontFamily": { "headline-lg": ["Playfair Display"], "label-badge": ["Plus Jakarta Sans"], "display-hero": ["Playfair Display"], "body-sm": ["Plus Jakarta Sans"], "display-hero-mobile": ["Playfair Display"], "headline-md": ["Playfair Display"], "label-caps": ["Plus Jakarta Sans"], "body-md": ["Plus Jakarta Sans"], "headline-sm": ["Playfair Display"], "label-numeral": ["Plus Jakarta Sans"], "body-lg": ["Plus Jakarta Sans"], "headline-lg-mobile": ["Playfair Display"] }, "fontSize": { "headline-lg": ["36px", { "lineHeight": "44px", "letterSpacing": "-0.01em", "fontWeight": "400" }], "label-badge": ["10px", { "lineHeight": "14px", "letterSpacing": "0.06em", "fontWeight": "700" }], "display-hero": ["56px", { "lineHeight": "64px", "letterSpacing": "-0.02em", "fontWeight": "400" }], "body-sm": ["13px", { "lineHeight": "20px", "letterSpacing": "0.01em", "fontWeight": "400" }], "display-hero-mobile": ["36px", { "lineHeight": "44px", "letterSpacing": "-0.01em", "fontWeight": "400" }], "headline-md": ["24px", { "lineHeight": "32px", "letterSpacing": "0em", "fontWeight": "500" }], "label-caps": ["11px", { "lineHeight": "16px", "letterSpacing": "0.08em", "fontWeight": "600" }], "body-md": ["15px", { "lineHeight": "24px", "letterSpacing": "0em", "fontWeight": "400" }], "headline-sm": ["20px", { "lineHeight": "28px", "letterSpacing": "0em", "fontWeight": "500" }], "label-numeral": ["14px", { "lineHeight": "20px", "letterSpacing": "-0.01em", "fontWeight": "600" }], "body-lg": ["18px", { "lineHeight": "28px", "letterSpacing": "-0.01em", "fontWeight": "400" }], "headline-lg-mobile": ["28px", { "lineHeight": "36px", "letterSpacing": "0em", "fontWeight": "400" }] } } } }</script>
+</head>
+
+<body class="bg-surface font-body-md text-on-surface antialiased">
+    <header class="fixed top-0 inset-x-0 z-50 bg-surface/90 backdrop-blur-xl shadow-[0_1px_8px_rgba(0,0,0,0.04)]">
+        <div
+            class="w-full bg-primary text-on-primary py-space-xs px-margin lg:px-margin-desktop text-center flex items-center justify-center gap-space-sm">
+            <span class="font-label-badge text-label-badge uppercase tracking-wider text-secondary-fixed">Tier
+                Unlocked</span><span
+                class="font-body-sm text-body-sm text-surface-variant font-light tracking-wide">Complimentary White
+                Glove Delivery on Ritual Bundles • Add 1 more item to unlock 20% OFF!</span></div>
+        <div class="h-20 max-w-7xl mx-auto px-margin lg:px-margin-desktop flex items-center justify-between gap-gutter">
+            <div class="flex items-center gap-gutter"><a class="flex flex-col group" href="#"><span
+                        class="font-headline-md text-headline-md font-normal tracking-tight text-on-surface group-hover:text-secondary transition-colors">Curated
+                        Atelier</span><span
+                        class="font-label-caps text-label-caps uppercase text-on-surface-variant tracking-[0.2em] -mt-1">Apothecary
+                        &amp; Rituals</span></a>
+                <nav class="hidden lg:flex items-center gap-space-md ml-gutter"
+                    data-active-classes="bg-surface-container-high text-on-surface font-bold rounded-lg"><a
+                        class="px-space-md py-space-xs font-body-sm text-body-sm text-on-surface-variant hover:text-on-surface transition-colors"
+                        data-path="bespoke-bundler" href="#">Bespoke Bundler</a><a
+                        class="px-space-md py-space-xs font-body-sm text-body-sm text-on-surface-variant hover:text-on-surface transition-colors"
+                        data-path="formulations" href="#">Formulations</a><a
+                        class="px-space-md py-space-xs font-body-sm text-body-sm text-on-surface-variant hover:text-on-surface transition-colors"
+                        data-path="discovery-sets" href="#">Discovery Sets</a><a
+                        class="px-space-md py-space-xs font-body-sm text-body-sm text-on-surface-variant hover:text-on-surface transition-colors"
+                        data-path="philosophy" href="#">Philosophy</a><a
+                        class="px-space-md py-space-xs font-body-sm text-body-sm text-on-surface-variant hover:text-on-surface transition-colors"
+                        data-path="account" href="#">Account</a></nav>
+            </div>
+            <div class="flex items-center gap-space-lg"><button aria-label="View Atelier Box"
+                    class="relative flex items-center gap-space-sm py-space-xs px-space-md rounded-full bg-surface-container-low hover:bg-surface-container-high transition-colors group"
+                    type="button"><span
+                        class="material-symbols-outlined text-[20px] text-on-surface-variant group-hover:text-on-surface transition-colors">inventory_2</span><span
+                        class="font-label-caps text-label-caps uppercase text-on-surface hidden sm:inline">Box
+                        Atelier</span><span
+                        class="inline-flex items-center justify-center px-space-xs py-0.5 rounded-full bg-secondary-container text-on-secondary-container font-label-badge text-label-badge">2
+                        / 3</span></button>
+                <div class="w-8 h-8 rounded-full bg-primary flex items-center justify-center shrink-0"><span
+                        class="material-symbols-outlined text-on-primary text-[18px]">person</span></div>
+            </div>
+        </div>
+    </header>
+    <main class="w-full pt-20 bg-surface min-h-[calc(100vh-20rem)]">
+        <div class="flex flex-col w-full">
+            <div class="relative w-full overflow-hidden px-margin lg:px-margin-desktop py-space-lg lg:py-space-xl">
+                <div
+                    class="absolute -top-32 right-10 w-96 h-96 rounded-full bg-secondary-container/20 blur-3xl pointer-events-none">
+                </div>
+                <div
+                    class="absolute top-1/2 -left-20 w-80 h-80 rounded-full bg-tertiary-fixed/20 blur-3xl pointer-events-none">
+                </div>
+                <div class="max-w-7xl mx-auto flex flex-col gap-space-lg relative z-10">
+                    <!-- Top Context / Breadcrumb Bar -->
+                    <div class="flex flex-wrap items-center justify-between gap-space-sm pb-space-xs">
+                        <div class="flex items-center gap-space-xs">
+                            <a class="font-label-caps text-label-caps uppercase tracking-[0.16em] text-on-surface-variant hover:text-on-surface transition-colors"
+                                href="#">Atelier Dispensary</a>
+                            <span class="text-outline-variant font-body-sm text-body-sm">/</span>
+                            <span
+                                class="font-label-caps text-label-caps uppercase tracking-[0.16em] text-secondary">Private
+                                Sanctum</span>
+                            <span class="text-outline-variant font-body-sm text-body-sm">•</span>
+                            <span
+                                class="font-body-sm text-body-sm text-on-surface-variant font-light hidden sm:inline">Bespoke
+                                Rituals &amp; Tier Privileges</span>
+                        </div>
+                        <div
+                            class="flex items-center gap-space-xs px-space-sm py-1 rounded-full bg-surface-container-high text-on-surface-variant">
+                            <span class="material-symbols-outlined text-[14px] text-secondary"
+                                style="font-variation-settings: 'FILL' 1;">shield</span>
+                            <span
+                                class="font-label-badge text-label-badge uppercase tracking-wider text-on-surface">256-Bit
+                                SSL Encrypted Ledger</span>
+                        </div>
+                    </div>
+                    <!-- Main Asymmetric Grid -->
+                    <div class="grid grid-cols-1 lg:grid-cols-12 gap-gutter-desktop items-start">
+                        <!-- Left Column: Authentication Hub (7 Cols) -->
+                        <div class="lg:col-span-7 flex flex-col gap-space-lg">
+                            <div
+                                class="bg-surface-container-lowest rounded-xl shadow-md p-space-md sm:p-space-lg lg:p-space-xl relative overflow-hidden">
+                                <!-- Atelier Monogram Accent -->
+                                <div
+                                    class="absolute top-space-md right-space-md pointer-events-none select-none opacity-[0.06] font-display-hero text-[110px] leading-none text-primary">
+                                    CA
+                                </div>
+                                <div class="flex flex-col gap-space-xs mb-space-lg">
+                                    <span
+                                        class="font-label-caps text-label-caps uppercase tracking-[0.2em] text-secondary">Authentication
+                                        Portal</span>
+                                    <h1 class="font-headline-lg text-headline-lg text-on-surface tracking-tight">Access
+                                        Your Apothecary Sanctuary</h1>
+                                    <p class="font-body-md text-body-md text-on-surface-variant font-light max-w-lg">
+                                        Manage your personalized seasonal coffrets, access clinical compounding notes,
+                                        and redeem privilege tier allocations.
+                                    </p>
+                                </div>
+                                <!-- Tab Switcher (Sign In vs Register) -->
+                                <div class="relative flex p-1 rounded-lg bg-surface-container-low mb-space-lg max-w-md">
+                                    <button
+                                        class="flex-1 py-space-xs px-space-md text-center rounded-DEFAULT font-label-caps text-label-caps uppercase tracking-wider transition-all duration-200 bg-surface-container-lowest text-on-surface shadow-sm"
+                                        id="tab-signin-btn" type="button">
+                                        Client Sign In
+                                    </button>
+                                    <button
+                                        class="flex-1 py-space-xs px-space-md text-center rounded-DEFAULT font-label-caps text-label-caps uppercase tracking-wider transition-all duration-200 text-on-surface-variant hover:text-on-surface"
+                                        id="tab-signup-btn" type="button">
+                                        Create Ritual Account
+                                    </button>
+                                </div>
+                                <!-- Form 1: Client Sign In -->
+                                <form class="flex flex-col gap-space-md" id="form-signin"
+                                    onsubmit="event.preventDefault();">
+                                    <div class="flex flex-col gap-space-xs">
+                                        <label
+                                            class="font-label-caps text-label-caps uppercase text-on-surface-variant tracking-wider"
+                                            for="signin-email">
+                                            Dispensary ID / Email Address
+                                        </label>
+                                        <div class="relative">
+                                            <span
+                                                class="absolute left-space-md top-1/2 -translate-y-1/2 material-symbols-outlined text-[18px] text-outline">alternate_email</span>
+                                            <input
+                                                class="w-full bg-surface-container-low text-on-surface font-body-md text-body-md rounded-lg py-space-sm pl-11 pr-space-md outline-none transition-all placeholder:text-outline-variant focus:bg-surface-container-lowest shadow-sm"
+                                                id="signin-email" placeholder="client@curatedatelier.com" required=""
+                                                type="email" />
+                                        </div>
+                                    </div>
+                                    <div class="flex flex-col gap-space-xs">
+                                        <div class="flex items-center justify-between">
+                                            <label
+                                                class="font-label-caps text-label-caps uppercase text-on-surface-variant tracking-wider"
+                                                for="signin-password">
+                                                Client Passkey
+                                            </label>
+                                            <a class="font-body-sm text-body-sm text-secondary hover:underline underline-offset-4 transition-colors"
+                                                href="#">
+                                                Forgot Key?
+                                            </a>
+                                        </div>
+                                        <div class="relative">
+                                            <span
+                                                class="absolute left-space-md top-1/2 -translate-y-1/2 material-symbols-outlined text-[18px] text-outline">key</span>
+                                            <input
+                                                class="w-full bg-surface-container-low text-on-surface font-body-md text-body-md rounded-lg py-space-sm pl-11 pr-12 outline-none transition-all placeholder:text-outline-variant focus:bg-surface-container-lowest shadow-sm"
+                                                id="signin-password" placeholder="••••••••••••" required=""
+                                                type="password" />
+                                            <button aria-label="Toggle password view"
+                                                class="absolute right-space-md top-1/2 -translate-y-1/2 text-outline hover:text-on-surface transition-colors"
+                                                id="toggle-signin-pw" type="button">
+                                                <span class="material-symbols-outlined text-[18px]">visibility</span>
+                                            </button>
+                                        </div>
+                                    </div>
+                                    <div class="flex items-center justify-between pt-space-xs">
+                                        <label class="flex items-center gap-space-xs cursor-pointer select-none">
+                                            <input checked=""
+                                                class="w-4 h-4 rounded-DEFAULT accent-primary bg-surface-container-low cursor-pointer"
+                                                type="checkbox" />
+                                            <span class="font-body-sm text-body-sm text-on-surface-variant">Remember
+                                                this workstation for 30 days</span>
+                                        </label>
+                                        <span
+                                            class="font-label-badge text-label-badge text-on-secondary-container bg-secondary-container px-space-xs py-0.5 rounded-full uppercase">Instant
+                                            Recall</span>
+                                    </div>
+                                    <button
+                                        class="mt-space-xs w-full py-space-sm px-space-lg rounded-lg bg-primary hover:bg-primary-container text-on-primary font-label-caps text-label-caps uppercase tracking-[0.14em] transition-all flex items-center justify-center gap-space-sm shadow-md hover:shadow-lg"
+                                        type="submit">
+                                        <span>Enter Personal Sanctuary</span>
+                                        <span class="material-symbols-outlined text-[18px]">arrow_forward</span>
+                                    </button>
+                                </form>
+                                <!-- Form 2: Create Ritual Account (Hidden by default) -->
+                                <form class="hidden flex-col gap-space-md" id="form-signup"
+                                    onsubmit="event.preventDefault();">
+                                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-space-md">
+                                        <div class="flex flex-col gap-space-xs">
+                                            <label
+                                                class="font-label-caps text-label-caps uppercase text-on-surface-variant tracking-wider"
+                                                for="signup-firstname">
+                                                First Name
+                                            </label>
+                                            <input
+                                                class="w-full bg-surface-container-low text-on-surface font-body-md text-body-md rounded-lg py-space-sm px-space-md outline-none transition-all placeholder:text-outline-variant focus:bg-surface-container-lowest shadow-sm"
+                                                id="signup-firstname" placeholder="Julianne" required="" type="text" />
+                                        </div>
+                                        <div class="flex flex-col gap-space-xs">
+                                            <label
+                                                class="font-label-caps text-label-caps uppercase text-on-surface-variant tracking-wider"
+                                                for="signup-lastname">
+                                                Surname
+                                            </label>
+                                            <input
+                                                class="w-full bg-surface-container-low text-on-surface font-body-md text-body-md rounded-lg py-space-sm px-space-md outline-none transition-all placeholder:text-outline-variant focus:bg-surface-container-lowest shadow-sm"
+                                                id="signup-lastname" placeholder="Vance" required="" type="text" />
+                                        </div>
+                                    </div>
+                                    <div class="flex flex-col gap-space-xs">
+                                        <label
+                                            class="font-label-caps text-label-caps uppercase text-on-surface-variant tracking-wider"
+                                            for="signup-email">
+                                            Personal Email Address
+                                        </label>
+                                        <div class="relative">
+                                            <span
+                                                class="absolute left-space-md top-1/2 -translate-y-1/2 material-symbols-outlined text-[18px] text-outline">mail</span>
+                                            <input
+                                                class="w-full bg-surface-container-low text-on-surface font-body-md text-body-md rounded-lg py-space-sm pl-11 pr-space-md outline-none transition-all placeholder:text-outline-variant focus:bg-surface-container-lowest shadow-sm"
+                                                id="signup-email" placeholder="j.vance@studio.com" required=""
+                                                type="email" />
+                                        </div>
+                                    </div>
+                                    <div class="flex flex-col gap-space-xs">
+                                        <label
+                                            class="font-label-caps text-label-caps uppercase text-on-surface-variant tracking-wider"
+                                            for="signup-password">
+                                            Create Passkey (8+ Characters)
+                                        </label>
+                                        <div class="relative">
+                                            <span
+                                                class="absolute left-space-md top-1/2 -translate-y-1/2 material-symbols-outlined text-[18px] text-outline">lock</span>
+                                            <input
+                                                class="w-full bg-surface-container-low text-on-surface font-body-md text-body-md rounded-lg py-space-sm pl-11 pr-12 outline-none transition-all placeholder:text-outline-variant focus:bg-surface-container-lowest shadow-sm"
+                                                id="signup-password" placeholder="••••••••••••" required=""
+                                                type="password" />
+                                            <button aria-label="Toggle password view"
+                                                class="absolute right-space-md top-1/2 -translate-y-1/2 text-outline hover:text-on-surface transition-colors"
+                                                id="toggle-signup-pw" type="button">
+                                                <span class="material-symbols-outlined text-[18px]">visibility</span>
+                                            </button>
+                                        </div>
+                                    </div>
+                                    <!-- VIP Enrollment Privilege Opt-in -->
+                                    <div
+                                        class="p-space-md rounded-lg bg-surface-container-low flex items-start gap-space-sm">
+                                        <input checked=""
+                                            class="mt-1 w-4 h-4 rounded-DEFAULT accent-secondary cursor-pointer shrink-0"
+                                            id="vip-privilege-check" type="checkbox" />
+                                        <label class="flex flex-col gap-0.5 cursor-pointer select-none"
+                                            for="vip-privilege-check">
+                                            <span
+                                                class="font-label-numeral text-label-numeral text-on-surface">Complimentary
+                                                Atelier Circle Membership</span>
+                                            <span class="font-body-sm text-body-sm text-on-surface-variant font-light">
+                                                Unlock 10% privilege savings on your first bespoke coffret, reserved
+                                                batch compounding alerts, and complimentary seasonal consultations.
+                                            </span>
+                                        </label>
+                                    </div>
+                                    <button
+                                        class="mt-space-xs w-full py-space-sm px-space-lg rounded-lg bg-primary hover:bg-primary-container text-on-primary font-label-caps text-label-caps uppercase tracking-[0.14em] transition-all flex items-center justify-center gap-space-sm shadow-md hover:shadow-lg"
+                                        type="submit">
+                                        <span>Complete Ritual Registration</span>
+                                        <span class="material-symbols-outlined text-[18px]">auto_awesome</span>
+                                    </button>
+                                </form>
+                                <!-- Social / Instant Access Divider -->
+                                <div class="relative my-space-lg flex items-center justify-center">
+                                    <div class="absolute inset-x-0 h-px bg-surface-variant"></div>
+                                    <span
+                                        class="relative px-space-md bg-surface-container-lowest font-label-caps text-label-caps uppercase tracking-wider text-outline">
+                                        Or Continue With Understated Ease
+                                    </span>
+                                </div>
+                                <!-- Luxury One-Click Providers -->
+                                <div class="grid grid-cols-1 sm:grid-cols-2 gap-space-sm">
+                                    <button
+                                        class="py-space-sm px-space-md rounded-lg bg-surface-container-low hover:bg-surface-container text-on-surface font-body-sm text-body-sm flex items-center justify-center gap-space-sm transition-all shadow-sm"
+                                        type="button">
+                                        <svg class="w-4 h-4 text-on-surface fill-current" viewbox="0 0 170 170">
+                                            <path
+                                                d="M150.37 130.25c-2.45 5.66-5.35 10.87-8.71 15.66-4.58 6.53-8.33 11.05-11.22 13.56-4.48 4.12-9.28 6.23-14.42 6.35-3.69 0-8.14-1.05-13.32-3.18-5.19-2.12-9.97-3.17-14.34-3.17-4.58 0-9.49 1.05-14.75 3.17-5.26 2.13-9.5 3.24-12.74 3.35-4.35.13-9.16-1.9-14.42-6.08-3.69-3.04-7.69-7.85-12-14.43-5.67-8.62-10.12-18.7-13.36-30.25-3.23-11.54-4.85-22.75-4.85-33.62 0-16.74 4.54-30.56 13.62-41.46 9.08-10.9 20.31-16.48 33.69-16.74 4.89 0 10.42 1.34 16.59 4.02 6.17 2.68 9.94 4.07 11.3 4.17 1.84 0 5.86-1.5 12.06-4.5 6.2-3 11.96-4.35 17.27-4.04 12.69.75 22.84 5.25 30.46 13.5-11.07 6.74-16.48 16.14-16.24 28.2.25 9.77 4.16 17.93 11.73 24.49 7.57 6.56 16.74 10.23 27.52 11.01-2.46 7.42-5.74 15.11-9.84 23.07zM119.22 33.69c0-7.39 2.66-14.44 7.98-21.15 5.32-6.72 11.99-11.23 20.02-13.54.49 1.13.75 2.37.78 3.72.03 7.39-2.68 14.5-8.13 21.33-5.46 6.83-12.27 11.24-20.44 13.23-.07-1.19-.21-2.39-.21-3.59z">
+                                            </path>
+                                        </svg>
+                                        <span class="font-medium">Continue with Apple</span>
+                                    </button>
+                                    <button
+                                        class="py-space-sm px-space-md rounded-lg bg-surface-container-low hover:bg-surface-container text-on-surface font-body-sm text-body-sm flex items-center justify-center gap-space-sm transition-all shadow-sm"
+                                        type="button">
+                                        <svg class="w-4 h-4" viewbox="0 0 24 24">
+                                            <path
+                                                d="M23.745 12.27c0-.7-.06-1.4-.19-2.07H12v4.51h6.6c-.29 1.52-1.14 2.82-2.4 3.68v3.05h3.88c2.27-2.09 3.665-5.17 3.665-9.17z"
+                                                fill="#4285F4"></path>
+                                            <path
+                                                d="M12 24c3.24 0 5.95-1.08 7.93-2.91l-3.88-3.05c-1.08.72-2.45 1.16-4.05 1.16-3.12 0-5.77-2.1-6.72-4.93H1.25v3.15C3.26 21.36 7.36 24 12 24z"
+                                                fill="#34A853"></path>
+                                            <path
+                                                d="M5.28 14.27c-.25-.72-.38-1.49-.38-2.27s.13-1.55.38-2.27V6.58H1.25C.45 8.18 0 9.99 0 12s.45 3.82 1.25 5.42l4.03-3.15z"
+                                                fill="#FBBC05"></path>
+                                            <path
+                                                d="M12 4.75c1.77 0 3.35.61 4.6 1.8l3.42-3.42C17.95 1.19 15.24 0 12 0 7.36 0 3.26 2.64 1.25 6.58l4.03 3.15c.95-2.83 3.6-4.98 6.72-4.98z"
+                                                fill="#EA4335"></path>
+                                        </svg>
+                                        <span class="font-medium">Continue with Google</span>
+                                    </button>
+                                </div>
+                                <div
+                                    class="mt-space-lg pt-space-md flex flex-wrap items-center justify-between gap-space-sm text-outline font-body-sm text-body-sm">
+                                    <span class="flex items-center gap-1.5">
+                                        <span class="w-2 h-2 rounded-full bg-secondary"></span>
+                                        <span>Active Headless Client Node</span>
+                                    </span>
+                                    <a class="hover:text-on-surface transition-colors" href="#">Dispensary Privacy
+                                        Charter</a>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- Right Column: Editorial Atmosphere & The Privilege Circle (5 Cols) -->
+                        <div class="lg:col-span-5 flex flex-col gap-space-lg">
+                            <!-- Editorial Luxury Imagery Card -->
+                            <div class="relative rounded-xl overflow-hidden bg-surface-container shadow-md group">
+                                <div class="bg-cover bg-center w-full h-56 transition-transform duration-700 ease-out group-hover:scale-105"
+                                    data-alt="A serene luxury apothecary still-life featuring amber glass serum dropper bottles, a hand-carved stone mortar, and dried botanical botanicals bathed in soft morning window sunlight with warm neutral linen textures"
+                                    style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuB7WdTt69xHu7MrZb2LXNAcmry--Um1tfvqGnZWR0ixI0e54mbVz0dtjsQFvwjFKZj3hdY0Na4QPRKSLHmvFT9O4kYrINp1PZhWDVV_onau3OzS-2rp2o5vgyajdj7-3Q97wE73VelfSrUaBvD1WI26Zrs3GITp16DvlVtGCCD4sy8tpYhSgmYDN2CZ0TGW8ThP1KtjBeknjWPTQJ9ME8lph8x0hMt2Pqd14cbgvIMyU87JlGJiXhQS')">
+                                </div>
+                                <div
+                                    class="absolute inset-0 bg-gradient-to-t from-primary/80 via-primary/30 to-transparent flex flex-col justify-end p-space-lg text-on-primary">
+                                    <span
+                                        class="font-label-caps text-label-caps uppercase text-secondary-fixed tracking-[0.2em]">Private
+                                        Atelier Allocation</span>
+                                    <h2 class="font-headline-sm text-headline-sm mt-1">Disciplined botanical alchemy,
+                                        reserved exclusively for registered clients.</h2>
+                                </div>
+                            </div>
+                            <!-- VIP Atelier Benefits Card -->
+                            <div
+                                class="bg-surface-container-low rounded-xl p-space-lg flex flex-col gap-space-md shadow-sm">
+                                <div class="flex items-center justify-between">
+                                    <div class="flex items-center gap-space-xs">
+                                        <span class="material-symbols-outlined text-[20px] text-tertiary-fixed-dim"
+                                            style="font-variation-settings: 'FILL' 1;">workspace_premium</span>
+                                        <span
+                                            class="font-label-caps text-label-caps uppercase tracking-[0.18em] text-on-surface">The
+                                            Privilege Circle</span>
+                                    </div>
+                                    <span
+                                        class="font-label-badge text-label-badge px-space-xs py-0.5 rounded-full bg-tertiary-container text-on-tertiary-container uppercase tracking-wider font-semibold">Tier
+                                        01</span>
+                                </div>
+                                <p class="font-body-sm text-body-sm text-on-surface-variant font-light">
+                                    Registered patron privileges activate immediately upon signing in, syncing
+                                    seamlessly with your physical custom coffret orders.
+                                </p>
+                                <!-- Privileges Breakdown List -->
+                                <div class="flex flex-col gap-space-sm pt-space-xs">
+                                    <div
+                                        class="flex items-start gap-space-sm p-space-sm rounded-lg bg-surface-container-lowest shadow-sm">
+                                        <div
+                                            class="w-8 h-8 rounded-full bg-secondary-container text-on-secondary-container flex items-center justify-center shrink-0 mt-0.5">
+                                            <span class="material-symbols-outlined text-[16px]">inventory_2</span>
+                                        </div>
+                                        <div class="flex flex-col">
+                                            <span class="font-label-numeral text-label-numeral text-on-surface">Saved
+                                                Ritual Coffrets</span>
+                                            <span
+                                                class="font-body-sm text-body-sm text-on-surface-variant font-light">Preserve
+                                                3-slot formula combinations and custom seasonal refills without
+                                                reconstitution.</span>
+                                        </div>
+                                    </div>
+                                    <div
+                                        class="flex items-start gap-space-sm p-space-sm rounded-lg bg-surface-container-lowest shadow-sm">
+                                        <div
+                                            class="w-8 h-8 rounded-full bg-secondary-container text-on-secondary-container flex items-center justify-center shrink-0 mt-0.5">
+                                            <span class="material-symbols-outlined text-[16px]">autorenew</span>
+                                        </div>
+                                        <div class="flex flex-col">
+                                            <span class="font-label-numeral text-label-numeral text-on-surface">Headless
+                                                Auto-Replenishment</span>
+                                            <span
+                                                class="font-body-sm text-body-sm text-on-surface-variant font-light">Set
+                                                tailored replenishment intervals with an automatic 15% VIP discount
+                                                tier.</span>
+                                        </div>
+                                    </div>
+                                    <div
+                                        class="flex items-start gap-space-sm p-space-sm rounded-lg bg-surface-container-lowest shadow-sm">
+                                        <div
+                                            class="w-8 h-8 rounded-full bg-secondary-container text-on-secondary-container flex items-center justify-center shrink-0 mt-0.5">
+                                            <span class="material-symbols-outlined text-[16px]">support_agent</span>
+                                        </div>
+                                        <div class="flex flex-col">
+                                            <span class="font-label-numeral text-label-numeral text-on-surface">Private
+                                                Dermal Concierge</span>
+                                            <span
+                                                class="font-body-sm text-body-sm text-on-surface-variant font-light">Direct
+                                                asynchronous consults with certified formulation chemists regarding
+                                                active dermal synergy.</span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <!-- Mini Trust & Security Footnote -->
+                                <div
+                                    class="flex flex-col gap-space-xs mt-space-xs pt-space-sm bg-surface-container/60 p-space-md rounded-lg">
+                                    <div class="flex items-center gap-space-xs text-on-surface-variant">
+                                        <span
+                                            class="material-symbols-outlined text-[16px] text-secondary">verified_user</span>
+                                        <span class="font-label-caps text-label-caps uppercase text-on-surface">Zero
+                                            Data Commercialization</span>
+                                    </div>
+                                    <p
+                                        class="font-body-sm text-body-sm text-on-surface-variant font-light leading-relaxed">
+                                        Client biological data, skin sensitivity records, and consultation notes are
+                                        encrypted with zero external ad-network syndication.
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <script>
+                (function () {
+                    const signInBtn = document.getElementById('tab-signin-btn');
+                    const signUpBtn = document.getElementById('tab-signup-btn');
+                    const formSignIn = document.getElementById('form-signin');
+                    const formSignUp = document.getElementById('form-signup');
+                    const toggleSignInPw = document.getElementById('toggle-signin-pw');
+                    const signInPwInput = document.getElementById('signin-password');
+                    const toggleSignUpPw = document.getElementById('toggle-signup-pw');
+                    const signUpPwInput = document.getElementById('signup-password');
+
+                    function activateSignIn() {
+                        signInBtn.classList.add('bg-surface-container-lowest', 'text-on-surface', 'shadow-sm');
+                        signInBtn.classList.remove('text-on-surface-variant');
+                        signUpBtn.classList.remove('bg-surface-container-lowest', 'text-on-surface', 'shadow-sm');
+                        signUpBtn.classList.add('text-on-surface-variant');
+
+                        formSignIn.classList.remove('hidden');
+                        formSignIn.classList.add('flex');
+                        formSignUp.classList.add('hidden');
+                        formSignUp.classList.remove('flex');
+                    }
+
+                    function activateSignUp() {
+                        signUpBtn.classList.add('bg-surface-container-lowest', 'text-on-surface', 'shadow-sm');
+                        signUpBtn.classList.remove('text-on-surface-variant');
+                        signInBtn.classList.remove('bg-surface-container-lowest', 'text-on-surface', 'shadow-sm');
+                        signInBtn.classList.add('text-on-surface-variant');
+
+                        formSignUp.classList.remove('hidden');
+                        formSignUp.classList.add('flex');
+                        formSignIn.classList.add('hidden');
+                        formSignIn.classList.remove('flex');
+                    }
+
+                    if (signInBtn && signUpBtn) {
+                        signInBtn.addEventListener('click', activateSignIn);
+                        signUpBtn.addEventListener('click', activateSignUp);
+                    }
+
+                    function toggleVisibility(input, btn) {
+                        if (!input || !btn) return;
+                        const isPassword = input.getAttribute('type') === 'password';
+                        input.setAttribute('type', isPassword ? 'text' : 'password');
+                        const icon = btn.querySelector('.material-symbols-outlined');
+                        if (icon) {
+                            icon.textContent = isPassword ? 'visibility_off' : 'visibility';
+                        }
+                    }
+
+                    if (toggleSignInPw && signInPwInput) {
+                        toggleSignInPw.addEventListener('click', function () {
+                            toggleVisibility(signInPwInput, toggleSignInPw);
+                        });
+                    }
+
+                    if (toggleSignUpPw && signUpPwInput) {
+                        toggleSignUpPw.addEventListener('click', function () {
+                            toggleVisibility(signUpPwInput, toggleSignUpPw);
+                        });
+                    }
+                })();
+        </script>
+    </main>
+    <footer class="w-full bg-surface-container-low text-on-surface mt-space-xl">
+        <div class="max-w-7xl mx-auto px-margin lg:px-margin-desktop py-space-xl">
+            <div class="grid grid-cols-1 md:grid-cols-12 gap-gutter-desktop">
+                <div class="md:col-span-5 flex flex-col gap-space-md"><span
+                        class="font-headline-md text-headline-md font-normal text-on-surface">Curated Atelier</span>
+                    <p class="font-body-md text-body-md text-on-surface-variant max-w-md font-light">Bespoke cosmetic
+                        formulations crafted with disciplined intentionality. Elevating daily regimens through
+                        customizable three-tier physical apothecary bundles.</p>
+                    <div class="flex items-center gap-space-md pt-space-xs"><span
+                            class="font-label-caps text-label-caps text-secondary uppercase">White Glove
+                            Dispensary</span><span class="w-1.5 h-1.5 rounded-full bg-outline-variant"></span><span
+                            class="font-label-caps text-label-caps text-on-surface-variant uppercase">Clean Botanical
+                            Purity</span></div>
+                </div>
+                <div class="md:col-span-2 flex flex-col gap-space-sm"><span
+                        class="font-label-caps text-label-caps uppercase tracking-wider text-on-surface">Atelier</span><a
+                        class="font-body-sm text-body-sm text-on-surface-variant hover:text-on-surface transition-colors"
+                        data-path="bespoke-bundler" href="#">Smart Box Bundler</a><a
+                        class="font-body-sm text-body-sm text-on-surface-variant hover:text-on-surface transition-colors"
+                        data-path="formulations" href="#">Active Formulations</a><a
+                        class="font-body-sm text-body-sm text-on-surface-variant hover:text-on-surface transition-colors"
+                        data-path="discovery-sets" href="#">Curated Discovery</a><a
+                        class="font-body-sm text-body-sm text-on-surface-variant hover:text-on-surface transition-colors"
+                        data-path="bespoke-gifting" href="#">Artisanal Gifting</a></div>
+                <div class="md:col-span-2 flex flex-col gap-space-sm"><span
+                        class="font-label-caps text-label-caps uppercase tracking-wider text-on-surface">Heritage</span><a
+                        class="font-body-sm text-body-sm text-on-surface-variant hover:text-on-surface transition-colors"
+                        data-path="philosophy" href="#">Formulation Philosophy</a><a
+                        class="font-body-sm text-body-sm text-on-surface-variant hover:text-on-surface transition-colors"
+                        data-path="botanical-sourcing" href="#">Sustainable Sourcing</a><a
+                        class="font-body-sm text-body-sm text-on-surface-variant hover:text-on-surface transition-colors"
+                        data-path="clinical-rituals" href="#">Regimen Guides</a><a
+                        class="font-body-sm text-body-sm text-on-surface-variant hover:text-on-surface transition-colors"
+                        data-path="press-editorial" href="#">Editorial Archive</a></div>
+                <div class="md:col-span-3 flex flex-col gap-space-sm"><span
+                        class="font-label-caps text-label-caps uppercase tracking-wider text-on-surface">Private
+                        Concierge</span>
+                    <p class="font-body-sm text-body-sm text-on-surface-variant font-light">Inquire with our licensed
+                        dermal pharmacists for tailored box regimen consultations.</p><a
+                        class="font-body-sm text-body-sm text-on-surface hover:text-secondary underline underline-offset-4 transition-colors pt-space-xs"
+                        href="mailto:concierge@curatedatelier.com">concierge@curatedatelier.com</a>
+                </div>
+            </div>
+            <div
+                class="mt-space-xl pt-space-lg flex flex-col sm:flex-row items-center justify-between gap-space-md text-on-surface-variant">
+                <span class="font-body-sm text-body-sm">© 2025 Curated Atelier Apothecary Inc. All rights
+                    reserved.</span>
+                <div class="flex items-center gap-space-lg font-body-sm text-body-sm"><a
+                        class="hover:text-on-surface transition-colors" href="#">Privacy Policy</a><a
+                        class="hover:text-on-surface transition-colors" href="#">Terms of Dispensary</a><a
+                        class="hover:text-on-surface transition-colors" href="#">Shipping &amp; Unboxing</a></div>
+            </div>
+        </div>
+    </footer>
+</body>
+
+</html>

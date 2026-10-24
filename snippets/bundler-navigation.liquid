@@ -1,0 +1,55 @@
+{{ 'bundler-navigation.css' | asset_url | stylesheet_tag }}
+
+<nav class="atelier-navbar">
+  <div class="atelier-container navbar-inner">
+    <a href="#" class="brand-block">
+      <span class="brand-title">Curated Atelier</span>
+      <span class="brand-subtitle">Apothecary &amp; Rituals</span>
+    </a>
+
+    <div class="nav-links">
+      <a href="#" class="nav-link-item active">Bespoke Bundler</a>
+      <a href="#" class="nav-link-item">Formulations</a>
+      <a href="#" class="nav-link-item">Discovery Sets</a>
+      <a href="#" class="nav-link-item">Philosophy</a>
+      <a href="#" class="nav-link-item">Account</a>
+    </div>
+
+    <div class="nav-actions">
+      <button type="button" class="box-atelier-btn">
+        <svg
+          width="16"
+          height="16"
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="2"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+        >
+          <path d="M21 8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16Z"></path>
+          <path d="m3.3 7 8.7 5 8.7-5"></path>
+          <path d="M12 22V12"></path>
+        </svg>
+        <span>Box Atelier</span>
+        <span class="nav-box-count">3 / 3</span>
+      </button>
+
+      <div class="user-avatar-pill">
+        <svg
+          width="16"
+          height="16"
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="2"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+        >
+          <path d="M19 21v-2a4 4 0 0 0-4-4H9a4 4 0 0 0-4 4v2"></path>
+          <circle cx="12" cy="7" r="4"></circle>
+        </svg>
+      </div>
+    </div>
+  </div>
+</nav>

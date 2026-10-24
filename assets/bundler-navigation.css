@@ -1,0 +1,114 @@
+.atelier-navbar {
+  background-color: rgba(251, 249, 246, 0.95);
+  backdrop-filter: blur(12px);
+  border-bottom: 1px solid var(--at-border);
+  position: fixed;
+  top: 38px;
+  left: 0;
+  right: 0;
+  width: 100%;
+  z-index: 40;
+}
+.navbar-inner {
+  height: 72px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.brand-block {
+  display: flex;
+  flex-direction: column;
+  text-decoration: none;
+  color: inherit;
+}
+
+.brand-title {
+  font-family: Georgia, serif;
+  font-size: 22px;
+  font-weight: 500;
+  letter-spacing: -0.01em;
+  line-height: 1.1;
+}
+
+.brand-subtitle {
+  font-size: 10px;
+  text-transform: uppercase;
+  letter-spacing: 0.18em;
+  color: var(--at-text-muted);
+  margin-top: 2px;
+}
+
+.nav-links {
+  display: none;
+  align-items: center;
+  gap: 8px;
+}
+
+@media (min-width: 992px) {
+  .nav-links {
+    display: flex;
+  }
+}
+
+.nav-link-item {
+  font-size: 13px;
+  text-decoration: none;
+  color: var(--at-text-muted);
+  padding: 8px 14px;
+  border-radius: 6px;
+  transition: all 0.2s ease;
+}
+
+.nav-link-item:hover {
+  color: var(--at-text);
+  background-color: var(--at-surface-low);
+}
+
+.nav-link-item.active {
+  color: var(--at-text);
+  background-color: var(--at-surface-high);
+  font-weight: 600;
+}
+
+.nav-actions {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.box-atelier-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background-color: var(--at-surface-low);
+  border: 1px solid var(--at-border);
+  padding: 8px 14px;
+  border-radius: 9999px;
+  font-size: 12px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: var(--at-text);
+  cursor: pointer;
+}
+
+.nav-box-count {
+  background-color: var(--at-accent-light);
+  color: var(--at-accent);
+  font-size: 10px;
+  font-weight: 700;
+  padding: 2px 7px;
+  border-radius: 9999px;
+}
+
+.user-avatar-pill {
+  width: 34px;
+  height: 34px;
+  border-radius: 50%;
+  background-color: var(--at-primary);
+  color: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
