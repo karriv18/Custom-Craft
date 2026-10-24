@@ -1,0 +1,58 @@
+{{ 'bundler-footer-bar.css' | asset_url | stylesheet_tag }}
+
+<footer class="atelier-footer">
+  <div class="atelier-container">
+    <div class="footer-grid">
+      <!-- Col 1: Brand Info -->
+      <div class="footer-col">
+        <span class="footer-brand-title">Curated Atelier</span>
+        <p class="footer-brand-desc">
+          Bespoke cosmetic formulations crafted with disciplined intentionality. Elevating daily regimens through
+          customizable three-tier physical apothecary bundles.
+        </p>
+        <div class="footer-pill-row">
+          <span class="eyebrow-tag" style="margin: 0;">White Glove Dispensary</span>
+          <span class="footer-dot-divider"></span>
+          <span class="eyebrow-tag" style="color: var(--at-text-muted); margin: 0;">Clean Botanical Purity</span>
+        </div>
+      </div>
+
+      <!-- Col 2: Atelier Links -->
+      <div class="footer-col">
+        <span class="footer-col-heading">Atelier</span>
+        <a class="footer-link" href="#">Smart Box Bundler</a>
+        <a class="footer-link" href="#">Active Formulations</a>
+        <a class="footer-link" href="#">Curated Discovery</a>
+        <a class="footer-link" href="#">Artisanal Gifting</a>
+      </div>
+
+      <!-- Col 3: Heritage Links -->
+      <div class="footer-col">
+        <span class="footer-col-heading">Heritage</span>
+        <a class="footer-link" href="#">Formulation Philosophy</a>
+        <a class="footer-link" href="#">Sustainable Sourcing</a>
+        <a class="footer-link" href="#">Regimen Guides</a>
+        <a class="footer-link" href="#">Editorial Archive</a>
+      </div>
+
+      <!-- Col 4: Private Concierge -->
+      <div class="footer-col">
+        <span class="footer-col-heading">Private Concierge</span>
+        <p class="footer-brand-desc">
+          Inquire with our licensed dermal pharmacists for tailored box regimen consultations.
+        </p>
+        <a class="footer-email-link" href="mailto:concierge@curatedatelier.com">concierge@curatedatelier.com</a>
+      </div>
+    </div>
+
+    <!-- Legal / Copyright Bottom Row -->
+    <div class="footer-bottom-bar">
+      <span>© {{ 'now' | date: '%Y' }} Curated Atelier Apothecary Inc. All rights reserved.</span>
+      <div class="footer-legal-links">
+        <a class="footer-link" href="#">Privacy Policy</a>
+        <a class="footer-link" href="#">Terms of Dispensary</a>
+        <a class="footer-link" href="#">Shipping &amp; Unboxing</a>
+      </div>
+    </div>
+  </div>
+</footer>
